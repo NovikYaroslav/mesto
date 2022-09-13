@@ -1,0 +1,49 @@
+@import url(../vendor/normalize.css);
+@import url(../font/Inter-font.css);
+
+
+.page {
+    background-color: #000000;
+    max-width: 880px;
+    min-width: 320px;
+    margin: 0 auto;
+    font-family: "Inter", Arial, sans-serif;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+}
+
+.header {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 74px;
+    margin: 45px auto 36.25px auto;
+}
+
+.header__logo {
+    width: 142px;
+    height: 33px;
+    color: #FFFFFF;
+}
+
+.header__line {
+    border: 1px solid #545454;
+}
+
+
+
+
+
+/* .text {
+font-style: normal;
+font-weight: 500;
+font-size: 42px;
+line-height: 48px;
+color:#FFFFFF;
+} */
+
