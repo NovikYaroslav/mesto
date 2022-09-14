@@ -18,6 +18,12 @@
     }
   }
 
+  @media screen and (max-width: 680px) {
+    .profile {
+      flex-direction: column;
+    }
+  }
+
 .avatar {
     /* border: 1px solid red; */
     width: 120px;
@@ -38,6 +44,13 @@
     align-items: flex-end;
 }
 
+@media screen and (max-width: 680px) {
+    .profile-info {
+      margin: 26px 0;
+      justify-items: center;
+    }
+  }
+
 
 .profile-info__edit-button {
     border: 1px solid #FFFFFF;
@@ -49,6 +62,14 @@
     height: 24px;
     margin-left: 18px;
 }
+
+@media screen and (max-width: 390px) {
+    .profile-info__edit-button {
+        width: 18px;
+        height: 18px;
+        margin-left: 10px;
+    }
+  }
 
 .profile-info__edit-button:hover {
     opacity: 0.6;
@@ -64,12 +85,18 @@ font-size: 42px;
 line-height: 48px;
 color:#FFFFFF;
 max-height: 39px;
-
 }
+
+@media screen and (max-width: 390px) {
+    .user-name {
+        font-size: 27px;
+        line-height: 33px;
+        max-height: 26px;
+    }
+  }
 
 .user-discription {
     margin: 0;
-
     margin-top: 16px;
     font-style: normal;
     font-weight: 400;
@@ -77,7 +104,17 @@ max-height: 39px;
     line-height: 22px;
     color: #FFFFFF;
     max-height: 18px;
+    grid-column-start: 1;
+    grid-column-end: 3;
 }
+
+@media screen and (max-width: 390px) {
+    .user-discription {
+        font-size: 14px;
+        line-height: 17px;
+        justify-self: center;
+    }
+  }
 
 .add-button {
     margin: 0 0 0 auto;
@@ -91,8 +128,19 @@ max-height: 39px;
     background-position: center;
     width: 150px;
     height: 50px;
-  
 }
+
+.add-button:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 680px) {
+    .add-button {
+      margin: 36px auto;
+      width: 282px;
+    }
+  }
 
 .elements {
     display: grid;
@@ -101,11 +149,19 @@ max-height: 39px;
     column-gap: 17px;
     row-gap: 20px;
     max-width: 880px;
+    margin-top: 51px;
 }
     
 @media screen and (max-width: 900px) {
     .elements {
         grid-template-columns: auto auto;
+        justify-content: center;
+    }
+  }
+
+@media screen and (max-width: 590px) {
+    .elements {
+        grid-template-columns: auto;
         justify-content: center;
     }
   }
@@ -163,3 +219,45 @@ color: #000000;
     background-image: url(../image/like_button_active.svg);
     opacity: 1;
 }
+
+
+.footer {
+display: flex;
+/* На будущее. Для вставки навигации и т.п. */
+margin-top: 67px;
+}
+
+@media screen and (max-width: 900px) {
+  .footer {
+    padding-left: 19px;
+    padding-right: 19px;
+  }
+}
+
+@media screen and (max-width: 590px) {
+  .footer {
+    margin-top: 48px;
+    margin-bottom: 36px;
+  }
+}
+
+
+.footer__copyright {
+  margin: 0;
+  font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 22px;
+color: #545454;
+}
+
+@media screen and (max-width: 590px) {
+  .footer__copyright {
+    font-size: 14px;
+line-height: 17px;
+  }
+}
+
+/* В версии 320 не ровный профайл */
+/* нет переполнения в элементс */
+/*  */
