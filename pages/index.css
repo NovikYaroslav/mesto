@@ -20,9 +20,15 @@
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__close/popup__close.css);
-/* @import url(../blocks/popup/__form/popup__form.css); */
+@import url(../blocks/popup/__form/popup__form.css);
+@import url(../blocks/popup/__title/popup__title.css);
+@import url(../blocks/user-discription/user-discription.css);
+@import url(../blocks/user-discription/__name/user-discription__name.css);
+@import url(../blocks/user-discription/__about/user-discription__about.css);
+@import url(../blocks/popup/__save/popup__save.css);
 
 
 
@@ -47,87 +53,11 @@
 
 
 
-.popup__title {
-  margin: 34px 0 54px 0;
-  font-style: normal;
-  font-weight: 900;
-  font-size: 24px;
-  line-height: 29px;
-}
 
-@media screen and (max-width: 600px) {
-  .popup__title {
-    width: 238px;
-    font-size: 18px;
-    line-height: 22px;
-  }
-}
 
-.popup__form-item {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  padding: 0;
-  border: none;
-  gap: 30px;
-}
 
-.popup__form-name {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  border: none;
-  height: 24px;
-  box-sizing: border-box;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  background-color: transparent;
 
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
-  text-align: start;
-}
 
-.popup__form-about {
-  min-width: 100%;
-  margin: 0;
-  padding: 0;
-  border: none;
-  height: 24px;
-  box-sizing: border-box;
 
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
-  text-align: start;
-}
 
-.popup__save {
-  margin: 48px auto 37px auto;
-  padding: 0;
-  width: 358px;
-  min-height: 50px;
-  background: #000000;
-  border-radius: 2px;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 22px;
-  text-align: center;
-  color: #ffffff;
-}
-
-@media screen and (max-width: 600px) {
-  .popup__save {
-    width: 238px;
-    max-height: 46px;
-    margin-top: 45px;
-    margin-bottom: 25px;
-  }
-}

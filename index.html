@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./pages/index.css" />
     <title>Mesto</title>
+  
   </head>
   <body class="page">
     <header class="header">
@@ -31,9 +32,9 @@
         />
         <div class="profile-info">
           <!-- сделал отдельным БЭМ блоком, чтобы можно было переиспользовать -->
-          <p class="profile-info__user-name">Жак-Ив Кусто</p>
+          <h1 class="profile-info__user-name">Жак-Ив Кусто</h1>
           <button class="edit-button"></button>
-          <p class="profile-info__user-discription">Исследователь океана</p>
+          <h2 class="profile-info__user-discription">Исследователь океана</h2>
         </div>
         <button class="add-button"></button>
       </section>
@@ -108,32 +109,34 @@
       </section>
 
       <footer class="footer">
-        <p class="footer__copyright">&#169; 2020 Mesto Russia</p>
+        <p class="footer__copyright">&#169; 2022 Mesto Russia</p>
       </footer>
 
       <section class="popup">
         <div class="popup__container">
           <button class="popup__close"></button>
           <form class="popup__form">
-            <p class="popup__title">Редактировать профиль</p>
-            <fieldset class="popup__form-item">
+            <h3 class="popup__title">Редактировать профиль</h3>
+            <fieldset class="user-discription">
               <input
-                class="popup__form-name"
+                class="user-discription__name"
                 type="text"
                 placeholder="Как Вас зовут?"
                 value="Жак-Ив Кусто"
               />
               <input
-                class="popup__form-about"
+                class="user-discription__about"
                 type="text"
                 placeholder="Кратко о себе"
                 value="Исследователь океана"
               />
             </fieldset>
-            <button class="popup__save">Сохранить</button>
+            <button class="popup__save" type="submit">Сохранить</button>
           </form>
         </div>
       </section>
     </main>
+<script src="./pages/index.js"></script>
+
   </body>
 </html>
