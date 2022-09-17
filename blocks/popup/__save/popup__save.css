@@ -12,6 +12,11 @@
     text-align: center;
     color: #ffffff;
   }
+
+  .popup__save:hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
   
   @media screen and (max-width: 600px) {
     .popup__save {
