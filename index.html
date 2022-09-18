@@ -19,7 +19,6 @@
         src="image/mesto-logo.svg"
         alt="Логотип проекта Место"
       />
-      <div class="header__line"></div>
     </header>
 
     <main>
@@ -29,13 +28,12 @@
           src="image/avatar.png"
           alt="Аватар пользователя"
         />
-        <div class="profile-info">
-          <!-- сделал отдельным БЭМ блоком, чтобы можно было переиспользовать -->
-          <h1 class="profile-info__user-name">Жак-Ив Кусто</h1>
-          <button class="edit-button"></button>
-          <h2 class="profile-info__user-discription">Исследователь океана</h2>
+        <div class="profile__info">
+          <h1 class="profile__name">Жак-Ив Кусто</h1>
+          <button class="profile__edit-button" type="button"></button>
+          <h2 class="profile__discription">Исследователь океана</h2>
         </div>
-        <button class="add-button"></button>
+        <button class="profile__add-button" type="button"></button>
       </section>
 
       <section class="elements">
@@ -47,7 +45,7 @@
           />
           <div class="element__caption">
             <h3 class="element__text">Санкт-Петербург</h3>
-            <button class="like-button"></button>
+            <button class="element__like-button" type="button"></button>
           </div>
         </div>
         <div class="element">
@@ -58,7 +56,7 @@
           />
           <div class="element__caption">
             <h3 class="element__text">Ротердам</h3>
-            <button class="like-button"></button>
+            <button class="element__like-button" type="button"></button>
           </div>
         </div>
         <div class="element">
@@ -69,7 +67,7 @@
           />
           <div class="element__caption">
             <h3 class="element__text">Валенсия</h3>
-            <button class="like-button"></button>
+            <button class="element__like-button" type="button"></button>
           </div>
         </div>
         <div class="element">
@@ -80,7 +78,7 @@
           />
           <div class="element__caption">
             <h3 class="element__text">Акко</h3>
-            <button class="like-button"></button>
+            <button class="element__like-button" type="button"></button>
           </div>
         </div>
         <div class="element">
@@ -91,7 +89,7 @@
           />
           <div class="element__caption">
             <h3 class="element__text">Москва</h3>
-            <button class="like-button"></button>
+            <button class="element__like-button" type="button"></button>
           </div>
         </div>
         <div class="element">
@@ -102,30 +100,28 @@
           />
           <div class="element__caption">
             <h3 class="element__text">Ямал</h3>
-            <button class="like-button"></button>
+            <button class="element__like-button" type="button"></button>
           </div>
         </div>
       </section>
 
-      <footer class="footer">
-        <p class="footer__copyright">&#169; 2022 Mesto Russia</p>
-      </footer>
-
       <section class="popup">
         <div class="popup__container">
-          <button class="popup__close"></button>
-          <form class="popup__form">
-            <h4 class="popup__title">Редактировать профиль</h4>
+          <button class="popup__close" type="button"></button>
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <form class="popup__form" name="user-discription">
             <fieldset class="user-discription">
               <input
-                class="user-discription__name"
+                class="user-discription__input user-discription__input_value_name"
                 type="text"
+                name="name"
                 placeholder="Как Вас зовут?"
                 value="Жак-Ив Кусто"
               />
               <input
-                class="user-discription__about"
+                class="user-discription__input user-discription__input_value_about"
                 type="text"
+                name="about"
                 placeholder="Кратко о себе"
                 value="Исследователь океана"
               />
@@ -135,6 +131,9 @@
         </div>
       </section>
     </main>
-    <script src="./pages/index.js"></script>
+    <footer class="footer">
+      <p class="footer__copyright">&#169; 2022 Mesto Russia</p>
+    </footer>
+    <script src="./scripts/index.js"></script>
   </body>
 </html>

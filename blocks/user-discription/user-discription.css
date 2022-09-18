@@ -1,5 +1,8 @@
 .user-discription {
+    display: flex;
+    flex-direction: column;
     margin: 0;
     padding: 0;
     border: none;
+    row-gap: 30px;
   }

@@ -1,18 +1,19 @@
-.profile-info {
+.profile__info {
     display: grid;
     grid-template-columns: 1fr auto;
     margin-left: 30px;
     justify-items: flex-start;
-    align-items: flex-end;
-    column-gap: 18px;
+    align-items: center;
     row-gap: 16px;
+    column-gap: 18px;
   }
   
   @media screen and (max-width: 690px) {
-    .profile-info {
-      margin-top: 26px 0 0 0;
+    .profile__info {
       justify-items: center;
-      column-gap: 10px;
       row-gap: 14px;
+      margin-left: 0;
+      margin-top: 23px;
+      column-gap: 10px;
     }
   }
