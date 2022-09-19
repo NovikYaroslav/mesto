@@ -44,7 +44,7 @@
             alt="Пейзаж Санкт-Петербурга.Россия. Разведенный мост"
           />
           <div class="element__caption">
-            <h3 class="element__text">Санкт-Петербург</h3>
+            <h4 class="element__text">Санкт-Петербург</h4>
             <button class="element__like-button" type="button"></button>
           </div>
         </div>
@@ -55,7 +55,7 @@
             alt="Пейзаж Ротердама.Голандия. Кубические дома"
           />
           <div class="element__caption">
-            <h3 class="element__text">Ротердам</h3>
+            <h4 class="element__text">Ротердам</h4>
             <button class="element__like-button" type="button"></button>
           </div>
         </div>
@@ -66,7 +66,7 @@
             alt="Пейзаж Валенсии.Испания. Главная площадь"
           />
           <div class="element__caption">
-            <h3 class="element__text">Валенсия</h3>
+            <h4 class="element__text">Валенсия</h4>
             <button class="element__like-button" type="button"></button>
           </div>
         </div>
@@ -77,7 +77,7 @@
             alt="Пейзаж Акко.Израиль. Стены старого города"
           />
           <div class="element__caption">
-            <h3 class="element__text">Акко</h3>
+            <h4 class="element__text">Акко</h4>
             <button class="element__like-button" type="button"></button>
           </div>
         </div>
@@ -88,7 +88,7 @@
             alt="Пейзаж Москвы.Россия. Сталинская высотка ночью"
           />
           <div class="element__caption">
-            <h3 class="element__text">Москва</h3>
+            <h4 class="element__text">Москва</h4>
             <button class="element__like-button" type="button"></button>
           </div>
         </div>
@@ -99,41 +99,40 @@
             alt="Пейзаж полуострова Ямал.Россия. Северное сияние"
           />
           <div class="element__caption">
-            <h3 class="element__text">Ямал</h3>
+            <h4 class="element__text">Ямал</h4>
             <button class="element__like-button" type="button"></button>
           </div>
-        </div>
-      </section>
-
-      <section class="popup">
-        <div class="popup__container">
-          <button class="popup__close" type="button"></button>
-          <h2 class="popup__title">Редактировать профиль</h2>
-          <form class="popup__form" name="user-discription">
-            <fieldset class="user-discription">
-              <input
-                class="user-discription__input user-discription__input_value_name"
-                type="text"
-                name="name"
-                placeholder="Как Вас зовут?"
-                value="Жак-Ив Кусто"
-              />
-              <input
-                class="user-discription__input user-discription__input_value_about"
-                type="text"
-                name="about"
-                placeholder="Кратко о себе"
-                value="Исследователь океана"
-              />
-            </fieldset>
-            <button class="popup__save" type="submit">Сохранить</button>
-          </form>
         </div>
       </section>
     </main>
     <footer class="footer">
       <p class="footer__copyright">&#169; 2022 Mesto Russia</p>
     </footer>
+    <section class="popup">
+      <div class="popup__container">
+        <button class="popup__close" type="button"></button>
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <form class="popup__form" name="user-discription">
+          <fieldset class="user-discription">
+            <input
+              class="user-discription__input user-discription__input_value_name"
+              type="text"
+              name="name"
+              placeholder="Как Вас зовут?"
+              value="Жак-Ив Кусто"
+            />
+            <input
+              class="user-discription__input user-discription__input_value_about"
+              type="text"
+              name="about"
+              placeholder="Кратко о себе"
+              value="Исследователь океана"
+            />
+          </fieldset>
+          <button class="popup__save" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </section>
     <script src="./scripts/index.js"></script>
   </body>
 </html>
