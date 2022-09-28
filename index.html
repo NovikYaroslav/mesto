@@ -38,6 +38,7 @@
 
       <section class="elements">
         <div class="element">
+          <button class="element__delete-button" type="button"></button>
           <img
             class="element__photo"
             src="image/Saint-Petersburg.jpg"
@@ -49,6 +50,7 @@
           </div>
         </div>
         <div class="element">
+          <button class="element__delete-button" type="button"></button>
           <img
             class="element__photo"
             src="image/Roterdam.jpg"
@@ -60,6 +62,7 @@
           </div>
         </div>
         <div class="element">
+          <button class="element__delete-button" type="button"></button>
           <img
             class="element__photo"
             src="image/Valensia.jpg"
@@ -71,6 +74,7 @@
           </div>
         </div>
         <div class="element">
+          <button class="element__delete-button" type="button"></button>
           <img
             class="element__photo"
             src="image/Akko.jpeg"
@@ -82,6 +86,7 @@
           </div>
         </div>
         <div class="element">
+          <button class="element__delete-button" type="button"></button>
           <img
             class="element__photo"
             src="image/Moscow.png"
@@ -93,6 +98,7 @@
           </div>
         </div>
         <div class="element">
+          <button class="element__delete-button" type="button"></button>
           <img
             class="element__photo"
             src="image/Ymal.jpg"
@@ -108,9 +114,10 @@
     <footer class="footer">
       <p class="footer__copyright">&#169; 2022 Mesto Russia</p>
     </footer>
-    <section class="popup">
+
+    <section class="popup" id="userPopup">
       <div class="popup__container">
-        <button class="popup__close" type="button"></button>
+        <button class="popup__close" type="button" id="userPopupClose"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
         <form class="popup__form" name="user-discription">
           <fieldset class="user-discription">
@@ -133,7 +140,47 @@
         </form>
       </div>
     </section>
+
+    <section class="popup" id="cardPopup">
+      <div class="popup__container">
+        <button class="popup__close" type="button" id="cardPopupClose"></button>
+        <h2 class="popup__title">Новое место</h2>
+        <form class="popup__form" name="user-card">
+          <fieldset class="user-discription">
+            <!-- унифицировать класс для формы -->
+            <input
+              class="user-discription__input user-discription__input_value_name"
+              type="text"
+              name="name"
+              placeholder="Название"
+              value=""
+            />
+
+            <input
+              class="user-discription__input user-discription__input_value_about"
+              type="text"
+              name="about"
+              placeholder="Ссылка на картинку"
+              value=""
+            />
+          </fieldset>
+          <button class="popup__save" type="submit">Создать</button>
+        </form>
+      </div>
+    </section>
+<!-- <template id="card">
+  <div class="element">
+    <img
+      class="element__photo"
+      src="image/Saint-Petersburg.jpg"
+      alt="Пейзаж Санкт-Петербурга.Россия. Разведенный мост"
+    />
+    <div class="element__caption">
+      <h2 class="element__text">Санкт-Петербург</h2>
+      <button class="element__like-button" type="button"></button>
+    </div>
+  </div>
+</template> -->
     <script src="./scripts/index.js"></script>
   </body>
 </html>
-<!-- проверка -->
