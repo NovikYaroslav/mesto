@@ -1,3 +1,30 @@
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
 const userPopupOpenButton = document.querySelector(".profile__edit-button");
 const cardPopupOpenButton = document.querySelector(".profile__add-button");
 const cardsPhotos = document.querySelectorAll(".element__photo");
@@ -21,6 +48,7 @@ const aboutInput = formElement.querySelector(
 );
 const userName = document.querySelector(".profile__name");
 const aboutUser = document.querySelector(".profile__discription");
+const deleteButtons = document.querySelectorAll(".element__delete-button");
 
 function openPopup(event) {
   if (event.target === userPopupOpenButton) {
@@ -33,17 +61,15 @@ function openPopup(event) {
   }
 }
 
-function closePopup() {
-  userPopup.classList.remove("popup_opened");
-  cardPopup.classList.remove("popup_opened");
-  photoPopup.classList.remove("popup_opened");
+function closePopup(currentPopup) {
+  currentPopup.classList.remove("popup_opened");
 }
 
 function savePopup(evt) {
   evt.preventDefault();
   userName.textContent = nameInput.value;
   aboutUser.textContent = aboutInput.value;
-  closePopup();
+  closePopup(userPopup);
 }
 
 function likeCard(event) {
@@ -64,9 +90,21 @@ cardsPhotos.forEach(function (cardPhoto) {
   cardPhoto.addEventListener("click", openPhoto);
 });
 
+function deleteCard(event) {
+event.target.parentElement.remove();
+}
+
+deleteButtons.forEach(function (deleteButton) {
+  deleteButton.addEventListener("click", deleteCard)
+})
+
 userPopupOpenButton.addEventListener("click", openPopup);
 cardPopupOpenButton.addEventListener("click", openPopup);
-userPopupCloseButton.addEventListener("click", closePopup);
-cardPopupCloseButton.addEventListener("click", closePopup);
-photoPopupCloseButton.addEventListener("click", closePopup);
+
+
+userPopupCloseButton.addEventListener("click", function () {closePopup(userPopup)});
+cardPopupCloseButton.addEventListener("click", function () {closePopup(cardPopup)});
+photoPopupCloseButton.addEventListener("click", function () {closePopup(photoPopup)});
+
+
 formElement.addEventListener("submit", savePopup);
