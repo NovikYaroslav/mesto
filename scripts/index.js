@@ -85,8 +85,6 @@ function savePopup(evt) {
   closePopup(userPopup);
 }
 
-console.log(initialCards);
-
 // Фцнкция загрузки карточек
 function loadCards() {
   initialCards.forEach(function (card) {
@@ -112,18 +110,13 @@ function createCard(item) {
 loadCards();
 
 // Функция создания новой карточки
-function createNewCard(evt) {
+function addNewCard(evt) {
   evt.preventDefault();
-  const newCard = cardTeamplate.content.cloneNode(true);
-  const newCardTitle = newCard.querySelector(".element__text");
-  const newCardPhoto = newCard.querySelector(".element__photo");
-  newCardPhoto.addEventListener("click", openPhoto);
-  const deleteButton = newCard.querySelector(".element__delete-button");
-  deleteButton.addEventListener("click", deleteCard);
-  const likeButton = newCard.querySelector(".element__like-button");
-  likeButton.addEventListener("click", likeCard);
-  newCardTitle.textContent = cardTitleInput.value;
-  newCardPhoto.src = cardPhotoInput.value;
+  const additionalCard = {
+    name: cardTitleInput.value,
+    link: cardPhotoInput.value
+  }
+  const newCard = createCard(additionalCard);
   cardContainer.prepend(newCard);
   closePopup(cardPopup);
 }
@@ -158,4 +151,4 @@ photoPopupCloseButton.addEventListener("click", function () {
   closePopup(photoPopup);
 });
 profileFormElement.addEventListener("submit", savePopup);
-cardFormElement.addEventListener("submit", createNewCard);
+cardFormElement.addEventListener("submit", addNewCard);
