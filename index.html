@@ -20,7 +20,6 @@
         alt="Логотип проекта Место"
       />
     </header>
-
     <main>
       <section class="profile">
         <img
@@ -35,21 +34,7 @@
         </div>
         <button class="profile__add-button" type="button"></button>
       </section>
-
-      <section class="elements">
-        <!-- <div class="element">
-          <button class="element__delete-button" type="button"></button>
-          <img
-            class="element__photo"
-            src="image/Saint-Petersburg.jpg"
-            alt="Пейзаж Санкт-Петербурга.Россия. Разведенный мост"
-          />
-          <div class="element__caption">
-            <h2 class="element__text">Санкт-Петербург</h2>
-            <button class="element__like-button" type="button"></button>
-          </div> -->
-
-      </section>
+      <section class="elements"></section>
     </main>
     <footer class="footer">
       <p class="footer__copyright">&#169; 2022 Mesto Russia</p>
@@ -60,7 +45,7 @@
         <button class="popup__close" type="button" id="userPopupClose"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
         <form class="popup__form" name="user-profile">
-          <fieldset class="popup-fieldset"> 
+          <fieldset class="popup-fieldset">
             <input
               class="popup-fieldset__input popup-fieldset__input_value_name"
               type="text"
@@ -80,7 +65,6 @@
         </form>
       </div>
     </section>
-
     <section class="popup" id="cardPopup">
       <div class="popup__container">
         <button class="popup__close" type="button" id="cardPopupClose"></button>
@@ -94,7 +78,6 @@
               placeholder="Название"
               value=""
             />
-
             <input
               class="popup-fieldset__input popup-fieldset__input_value_card-photo"
               type="text"
@@ -107,7 +90,6 @@
         </form>
       </div>
     </section>
-
     <section class="popup" id="photoPopup">
       <figure class="popup__photo-container">
         <button
@@ -116,29 +98,22 @@
           id="photoPopupClose"
         ></button>
         <img
-        class="popup__photo"
+          class="popup__photo"
           src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg"
         />
         <figcaption class="popup__photo-capture">Алтай</figcaption>
       </figure>
     </section>
-
     <template id="cardTeamplate">
-  <div class="element">
-    <button class="element__delete-button" type="button"></button>
-    <img
-      class="element__photo"
-      src=""
-    />
-    <div class="element__caption">
-      <h2 class="element__text"></h2>
-      <button class="element__like-button" type="button"></button>
-    </div>
-  </div>
-</template>
-
-    <!-- <script src="./scripts/cards.js"></script> -->
-
+      <div class="element">
+        <button class="element__delete-button" type="button"></button>
+        <img class="element__photo" src="" />
+        <div class="element__caption">
+          <h2 class="element__text"></h2>
+          <button class="element__like-button" type="button"></button>
+        </div>
+      </div>
+    </template>
     <script src="./scripts/index.js"></script>
   </body>
 </html>
