@@ -4,3 +4,8 @@
     object-fit: cover;
     border-radius: 10px 10px 0px 0px;
   }
+
+  .element__photo:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
