@@ -119,17 +119,17 @@
       <div class="popup__container">
         <button class="popup__close" type="button" id="userPopupClose"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" name="user-discription">
-          <fieldset class="user-discription">
+        <form class="popup__form" name="user-profile">
+          <fieldset class="popup-fieldset"> 
             <input
-              class="user-discription__input user-discription__input_value_name"
+              class="popup-fieldset__input popup-fieldset__input_value_name"
               type="text"
               name="name"
               placeholder="Как Вас зовут?"
               value="Жак-Ив Кусто"
             />
             <input
-              class="user-discription__input user-discription__input_value_about"
+              class="popup-fieldset__input popup-fieldset__input_value_about"
               type="text"
               name="about"
               placeholder="Кратко о себе"
@@ -146,10 +146,9 @@
         <button class="popup__close" type="button" id="cardPopupClose"></button>
         <h2 class="popup__title">Новое место</h2>
         <form class="popup__form" name="user-card">
-          <fieldset class="user-discription">
-            <!-- унифицировать класс для формы -->
+          <fieldset class="popup-fieldset">
             <input
-              class="user-discription__input user-discription__input_value_name"
+              class="popup-fieldset__input popup-fieldset__input_value_card-title"
               type="text"
               name="name"
               placeholder="Название"
@@ -157,7 +156,7 @@
             />
 
             <input
-              class="user-discription__input user-discription__input_value_about"
+              class="popup-fieldset__input popup-fieldset__input_value_card-photo"
               type="text"
               name="about"
               placeholder="Ссылка на картинку"
