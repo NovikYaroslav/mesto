@@ -37,7 +37,7 @@
       </section>
 
       <section class="elements">
-        <!-- <div class="element">
+        <div class="element">
           <button class="element__delete-button" type="button"></button>
           <img
             class="element__photo"
@@ -96,7 +96,7 @@
             <h2 class="element__text">Москва</h2>
             <button class="element__like-button" type="button"></button>
           </div>
-        </div> -->
+        </div>
          <div class="element">
           <button class="element__delete-button" type="button"></button>
           <img
@@ -150,17 +150,17 @@
             <input
               class="popup-fieldset__input popup-fieldset__input_value_card-title"
               type="text"
-              name="name"
+              name="card-title"
               placeholder="Название"
-              value=""
+              value="Архыз"
             />
 
             <input
               class="popup-fieldset__input popup-fieldset__input_value_card-photo"
               type="text"
-              name="about"
+              name="photo"
               placeholder="Ссылка на картинку"
-              value=""
+              value="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
             />
           </fieldset>
           <button class="popup__save" type="submit">Создать</button>
@@ -183,20 +183,22 @@
       </figure>
     </section>
 
-    <!-- <template id="card">
+    <template id="cardTeamplate">
   <div class="element">
+    <button class="element__delete-button" type="button"></button>
     <img
       class="element__photo"
-      src="image/Saint-Petersburg.jpg"
-      alt="Пейзаж Санкт-Петербурга.Россия. Разведенный мост"
+      src=""
     />
     <div class="element__caption">
-      <h2 class="element__text">Санкт-Петербург</h2>
+      <h2 class="element__text"></h2>
       <button class="element__like-button" type="button"></button>
     </div>
   </div>
-</template> -->
+</template>
+
     <!-- <script src="./scripts/cards.js"></script> -->
+
     <script src="./scripts/index.js"></script>
   </body>
 </html>

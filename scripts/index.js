@@ -38,16 +38,27 @@ const cardPopupCloseButton = document.getElementById("cardPopupClose");
 const photoPopupCloseButton = document.getElementById("photoPopupClose");
 const likeButtons = document.querySelectorAll(".element__like-button");
 const likeButtonsArray = Array.from(likeButtons);
-const formElement = userPopup.querySelector(".popup__form");
-const nameInput = formElement.querySelector(
+const profileFormElement = userPopup.querySelector('[name="user-profile"]');
+const cardFormElement = document.querySelector('[name="user-card"]');
+const nameInput = profileFormElement.querySelector(
   ".popup-fieldset__input_value_name"
 );
-const aboutInput = formElement.querySelector(
+const aboutInput = profileFormElement.querySelector(
   ".popup-fieldset__input_value_about"
 );
+const cardTitleInput = document.querySelector(".popup-fieldset__input_value_card-title");
+const cardPhotoInput = document.querySelector(".popup-fieldset__input_value_card-photo");
 const userName = document.querySelector(".profile__name");
 const aboutUser = document.querySelector(".profile__discription");
 const deleteButtons = document.querySelectorAll(".element__delete-button");
+const cardTeamplate = document.getElementById("cardTeamplate");
+const cardContainer = document.querySelector(".elements")
+
+
+console.log(cardTitleInput)
+console.log(cardPhotoInput)
+console.log(aboutInput)
+console.log(likeButtonsArray)
 
 // Функции
 
@@ -77,6 +88,50 @@ function savePopup(evt) {
   aboutUser.textContent = aboutInput.value;
   closePopup(userPopup);
 }
+
+// функция которая клонирует типлейт. меняет element-text на input text. меняет img src на input text.
+// добавляет карточку в начало elements
+
+
+
+
+
+// function loadInitialCards() {
+//   initialCards.forEach(item, function(item) {
+//   const initialCard = createCard(item)
+//   cardContainer.append(initialCard)
+//   });
+// }
+
+// function createCard(item) {
+
+//   if 
+//   const currentCard = cardTeamplate.content.cloneNode(true);
+//   const currentCardTitle = cardTeamplate.querySelector(".element__text");
+//   const currentCardPhoto = cardTeamplate.querySelector(".element__photo");
+//   currentCardTitle = item.name;
+//   currentCardPhoto = item.link;
+//   return currentCard;
+// }
+
+// loadInitialCards()
+
+
+function createNewCard(evt) {
+  evt.preventDefault()
+  const currentCard = cardTeamplate.content.cloneNode(true);
+  const currentCardTitle = currentCard.querySelector(".element__text");
+  const currentCardPhoto = currentCard.querySelector(".element__photo");
+  currentCardTitle.textContent = cardTitleInput.value;
+  currentCardPhoto.src = cardPhotoInput.value;
+  cardContainer.prepend(currentCard)
+
+  closePopup(cardPopup)
+}
+
+
+
+
 
 // Функция активации лайка
 function likeCard(event) {
@@ -126,4 +181,7 @@ photoPopupCloseButton.addEventListener("click", function () {
   closePopup(photoPopup);
 });
 
-formElement.addEventListener("submit", savePopup);
+profileFormElement.addEventListener("submit", savePopup);
+cardFormElement.addEventListener("submit", createNewCard);
+
+
