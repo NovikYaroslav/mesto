@@ -29,12 +29,12 @@ const cardPopupOpenButton = document.querySelector(".profile__add-button");
 const popupPhoto = document.querySelector(".popup__photo");
 const popupPhotoCapture = document.querySelector(".popup__photo-capture");
 const cardText = document.querySelector(".element__text");
-const userPopup = document.getElementById("userPopup");
-const cardPopup = document.getElementById("cardPopup");
-const photoPopup = document.getElementById("photoPopup");
-const userPopupCloseButton = document.getElementById("userPopupClose");
-const cardPopupCloseButton = document.getElementById("cardPopupClose");
-const photoPopupCloseButton = document.getElementById("photoPopupClose");
+const userPopup = document.querySelector(".popup_for_user");
+const cardPopup = document.querySelector(".popup_for_card");
+const photoPopup = document.querySelector(".popup_for_photo");
+const userPopupCloseButton = userPopup.querySelector(".popup__close_for_user");
+const cardPopupCloseButton = cardPopup.querySelector(".popup__close_for_card");
+const photoPopupCloseButton = photoPopup.querySelector(".popup__close_for_photo");
 const profileFormElement = userPopup.querySelector('[name="user-profile"]');
 const cardFormElement = document.querySelector('[name="user-card"]');
 const nameInput = profileFormElement.querySelector(
@@ -51,7 +51,7 @@ const cardPhotoInput = document.querySelector(
 );
 const userName = document.querySelector(".profile__name");
 const aboutUser = document.querySelector(".profile__discription");
-const cardTeamplate = document.getElementById("cardTeamplate");
+const cardTeamplate = document.querySelector(".cardTeamplate");
 const cardContainer = document.querySelector(".elements");
 
 function openPopup(event) {

@@ -40,9 +40,9 @@
       <p class="footer__copyright">&#169; 2022 Mesto Russia</p>
     </footer>
 
-    <section class="popup" id="userPopup">
+    <section class="popup popup_for_user">
       <div class="popup__container">
-        <button class="popup__close" type="button" id="userPopupClose"></button>
+        <button class="popup__close popup__close_for_user" type="button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
         <form class="popup__form" name="user-profile">
           <fieldset class="popup-fieldset">
@@ -65,9 +65,9 @@
         </form>
       </div>
     </section>
-    <section class="popup" id="cardPopup">
+    <section class="popup popup_for_card">
       <div class="popup__container">
-        <button class="popup__close" type="button" id="cardPopupClose"></button>
+        <button class="popup__close popup__close_for_card" type="button"></button>
         <h2 class="popup__title">Новое место</h2>
         <form class="popup__form" name="user-card">
           <fieldset class="popup-fieldset">
@@ -90,12 +90,11 @@
         </form>
       </div>
     </section>
-    <section class="popup" id="photoPopup">
+    <section class="popup popup_for_photo">
       <figure class="popup__photo-container">
         <button
-          class="popup__close"
+          class="popup__close popup__close_for_photo"
           type="button"
-          id="photoPopupClose"
         ></button>
         <img
           class="popup__photo"
@@ -104,7 +103,7 @@
         <figcaption class="popup__photo-capture">Алтай</figcaption>
       </figure>
     </section>
-    <template id="cardTeamplate">
+    <template class="cardTeamplate">
       <div class="element">
         <button class="element__delete-button" type="button"></button>
         <img class="element__photo"/>
