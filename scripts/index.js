@@ -85,6 +85,7 @@ function createCard(item) {
   initialCardPhoto.addEventListener("click", function () {
     photoPopup.classList.toggle("popup_opened");
     popupPhoto.src = initialCardPhoto.src;
+    popupPhoto.alt = initialCardPhoto.alt;
     popupPhotoCapture.textContent = initialCardTitle.textContent;
   });
   const deleteButton = initialCard.querySelector(".element__delete-button");
@@ -93,6 +94,7 @@ function createCard(item) {
   likeButton.addEventListener("click", likeCard);
   initialCardTitle.textContent = item.name;
   initialCardPhoto.src = item.link;
+  initialCardPhoto.alt = item.name;
   return initialCard;
 }
 
