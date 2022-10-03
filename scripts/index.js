@@ -125,7 +125,8 @@ function likeCard(event) {
 }
 
 function deleteCard(event) {
-  event.target.parentElement.remove();
+  const element = event.target.closest(".element")
+  element.remove();
 }
 
 closeButtons.forEach(function (closeButton) {
