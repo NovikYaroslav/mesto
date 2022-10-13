@@ -51,6 +51,7 @@ const userName = document.querySelector(".profile__name");
 const aboutUser = document.querySelector(".profile__discription");
 const cardTeamplate = document.querySelector(".cardTeamplate");
 const cardContainer = document.querySelector(".elements");
+const popups = document.querySelectorAll(".popup");
 
 function openPopupTrue(popup) {
   popup.classList.add("popup_opened");
@@ -71,6 +72,14 @@ function preparePopup(event) {
 
 function closePopup(openedPopup) {
   openedPopup.classList.remove("popup_opened");
+}
+
+function escapePopup(evt) {
+  if (evt.key == "Escape") {
+    userPopup.classList.remove("popup_opened");
+    cardPopup.classList.remove("popup_opened");
+    photoPopup.classList.remove("popup_opened");
+  }
 }
 
 function savePopup(evt) {
@@ -125,7 +134,7 @@ function likeCard(event) {
 }
 
 function deleteCard(event) {
-  const element = event.target.closest(".element")
+  const element = event.target.closest(".element");
   element.remove();
 }
 
@@ -136,7 +145,20 @@ closeButtons.forEach(function (closeButton) {
   });
 });
 
+popups.forEach(function (popup) {
+  popup.addEventListener("click", function (event) {
+    if (event.target.classList.contains("popup_opened")) {
+      const currentPopup = event.target;
+      closePopup(currentPopup);
+    }
+  });
+  popup.addEventListener("mouseover", function (event) {
+    event.currentTarget.style.setProperty("cursor", "pointer");
+  });
+});
+
 userPopupOpenButton.addEventListener("click", preparePopup);
 cardPopupOpenButton.addEventListener("click", preparePopup);
 profileFormElement.addEventListener("submit", savePopup);
 cardFormElement.addEventListener("submit", addNewCard);
+document.addEventListener("keydown", escapePopup);
