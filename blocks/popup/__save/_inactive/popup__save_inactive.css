@@ -1,29 +1,28 @@
 .popup__save_inactive {
-    margin: 31px auto 37px auto;
-    padding: 0;
-    width: 358px;
-    height: 50px;
-    background: none;
-    border: 1px solid #000000;
-    border-radius: 2px;
-    font-family: 'Inter', "Arial", sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 22px;
-    text-align: center;
-    color: #000000;
-    opacity: 0.2;
-    
+  margin: 12px auto 37px auto;
+  padding: 0;
+  width: 358px;
+  height: 50px;
+  background: none;
+  border: 1px solid #000000;
+  border-radius: 2px;
+  font-family: "Inter", "Arial", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: #000000;
+  opacity: 0.2;
+}
+
+@media screen and (max-width: 600px) {
+  .popup__save-inactive {
+    width: 238px;
+    height: 46px;
+    margin-top: 45px;
+    margin-bottom: 25px;
+    font-size: 14px;
+    line-height: 17px;
   }
-  
-  @media screen and (max-width: 600px) {
-    .popup__save-inactive {
-      width: 238px;
-      height: 46px;
-      margin-top: 45px;
-      margin-bottom: 25px;
-      font-size: 14px;
-      line-height: 17px;
-    }
-  }
+}

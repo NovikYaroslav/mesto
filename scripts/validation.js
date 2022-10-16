@@ -1,148 +1,79 @@
-const forms = document.querySelectorAll(".popup__form");
-const submitButtons = document.querySelectorAll(".popup__save");
+const elements = {
+  popup: ".popup",
+  forms: ".popup__form",
+  inputs: ".popup-fieldset__input",
+  sumbitButtons: ".popup__save",
+  sumbitButtonsInactive: "popup__save_inactive",
+  inputsError: "popup__error",
+};
 
+//   берет все формы,создает массив и на каждую форму вешает слушатель (отмена отправки) и вызывает функцию на каждую форму.
+function enableValidation(elements) {
+  const formList = Array.from(document.querySelectorAll(elements.forms));
+  formList.forEach(function (formElement) {
+    formElement.addEventListener("submit", function (evt) {
+      evt.preventDefault();
+    });
+    setEventListeners(formElement, elements);
+  });
+}
 
-// function validateInput(inputElement) {
-//     const errorElement = document.querySelector(`#${inputElement.name}-error`);
-//     if (inputElement.checkValidity()) {
-//         console.log("input valid")
-//         errorElement.textContent = "";
-//        }
-//        else {
-//         console.log("input invalid")
-//         errorElement.textContent = inputElement.validationMessage;
-//         inputElement.style.setProperty("border-bottom", "1px solid red")
-//        }
-// }
+enableValidation(elements);
 
-// function validateFormLive(event) {
-//    validateInput(event.target)
-// }
+//  создает массив из всех инпутов каждой формы и вешает на них слушатель который запускате 2 функции:
+// 1. проверяет инпутs, соотвествуют ли введенные данные, требованиям.
+// 2. меняет состояние кнопки, в зависимости от результатов проверки инпа.
 
+function setEventListeners(formElement, elements) {
+  const inputList = Array.from(formElement.querySelectorAll(elements.inputs));
+  const saveButton = formElement.querySelector(elements.sumbitButtons);
+  inputList.forEach(function (inputElement) {
+    inputElement.addEventListener("input", function () {
+      checkInputValidity(formElement, inputElement, elements);
+      toggleButtonState(inputList, saveButton, elements);
+    });
+    toggleButtonState(inputList, saveButton, elements);
+  });
+}
 
-// forms.forEach ( function (form) {
-//     form.addEventListener("submit", function validateForm (event) {
-//         event.preventDefault();
-//         validateInput(nameInput)
-//         validateInput(aboutInput)
-//         validateInput(cardTitleInput)
-//         validateInput(cardPhotoInput)
-//        if (form.checkValidity()) {
-//         console.log("valid")
-//         form.reset()
-//        }
-//        else {
-       
-  
-//        }
-//     })
-//     form.addEventListener("input", validateFormLive)
-// })
+//   проверяет валидна ли форма и каждый инпут в отдельности.
+function checkInputValidity(formElement, inputElement, elements) {
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage);
+  } else {
+    hideInputError(formElement, inputElement, elements);
+  }
+}
 
-// // выфвфывфывфывфывфывфыв
+// если форма невалидна, показывает браузерное сообщение об ошибке и выделяет поле
+function showInputError(formElement, inputElement, errorMessage) {
+  const errorElement = formElement.querySelector(`#${inputElement.name}-error`);
+  errorElement.textContent = errorMessage;
+  inputElement.style.setProperty("border-bottom", "1px solid red");
+}
+// если форма валидна, очишает браузерное сообщение об ошибке.
+function hideInputError(formElement, inputElement, elements) {
+  const errorElement = formElement.querySelector(`#${inputElement.name}-error`);
+  errorElement.textContent = "";
+  inputElement.style.removeProperty("border-bottom", "1px solid red");
+}
 
-// function validateInput(inputElement, form) {
-//     const errorElement = document.querySelector(`#${inputElement.name}-error`);
-//     if (inputElement.checkValidity()) {
-//         console.log("input valid")
-//         errorElement.textContent = "";
-//        }
-//        else {
-//         console.log("input invalid")
-//         errorElement.textContent = inputElement.validationMessage;
-//         inputElement.style.setProperty("border-bottom", "1px solid red")
-//        }
-//     if (form.checkValidity()) {
-//         submitButtonsState(true)
-//     }
-//     else {
-//         submitButtonsState(false)
-//     }
-// }
+// проверяет все инпуты, на предмет неваладиности хотя бы одного.
+function hasInvalidInput(inputList) {
+  return inputList.some(function (inputElement) {
+    return !inputElement.validity.valid;
+  });
+}
 
-// function submitButtonsState (isActive) {
-//     submitButtons.forEach( function (button) {
-//         if (isActive) {
-//         button.classList.add("popup__save")  
-//         button.classList.remove("popup__save_inactive") 
-//         }
-//         else {
-//         button.setAttribute("disabled", true)
-//         button.classList.remove("popup__save")  
-//         button.classList.add("popup__save_inactive")
-//         }
-//     })
-// }
-
-// function validateFormLive(event) {
-//    validateInput(event.target)
-// }
-
-
-// forms.forEach ( function (form) {
-//     form.addEventListener("submit", function validateForm (event) {
-//         event.preventDefault();
-//         makeValidate (form)
-//         console.log("makevalidate")
-// })
-// })
-
-// function makeValidate (form) {
-//     validateInput(nameInput, form)
-//     validateInput(aboutInput, form)
-//     validateInput(cardTitleInput, form)
-//     validateInput(cardPhotoInput, form)
-//     console.log("hi")
-//    if (form.checkValidity()) {
-//     console.log("valid")
-//     form.reset()
-//    }
-//    else {
-//    }
-//    form.addEventListener("input", validateFormLive)
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// #FF0000
+// если найдет 1 невалидный инпут, убנрает активность кнопки.
+// если все инпуты валидны, возвращает валидность кнопки.
+function toggleButtonState(inputList, buttonElement, elements) {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add(elements.sumbitButtonsInactive);
+    buttonElement.setAttribute("disabled", true);
+  } else {
+    buttonElement.classList.remove(elements.sumbitButtonsInactive);
+    buttonElement.classList.add(elements.sumbitButtons);
+    buttonElement.removeAttribute("disabled");
+  }
+}
