@@ -47,22 +47,30 @@
           type="button"
         ></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" name="user-profile">
+        <form class="popup__form" name="user-profile" novalidate>
           <fieldset class="popup-fieldset">
             <input
               class="popup-fieldset__input popup-fieldset__input_value_name"
+              required
+              minlength="2"
+              maxlength="40"
               type="text"
               name="name"
               placeholder="Как Вас зовут?"
               value="Жак-Ив Кусто"
             />
+            <span class="popup__error" id="name-error"></span>
             <input
               class="popup-fieldset__input popup-fieldset__input_value_about"
+              required
+              minlength="2"
+              maxlength="200"
               type="text"
               name="about"
               placeholder="Кратко о себе"
               value="Исследователь океана"
             />
+            <span class="popup__error" id="about-error"></span>
           </fieldset>
           <button class="popup__save" type="submit">Сохранить</button>
         </form>
@@ -76,22 +84,28 @@
           type="button"
         ></button>
         <h2 class="popup__title">Новое место</h2>
-        <form class="popup__form" name="user-card">
+        <form class="popup__form" name="user-card" novalidate>
           <fieldset class="popup-fieldset">
             <input
               class="popup-fieldset__input popup-fieldset__input_value_card-title"
+              required
+              minlength="2"
+              maxlength="40"
               type="text"
               name="card-title"
               placeholder="Название"
               value=""
             />
+            <span class="popup__error" id="card-title-error"></span>
             <input
               class="popup-fieldset__input popup-fieldset__input_value_card-photo"
-              type="text"
+              required
+              type="url"
               name="photo"
               placeholder="Ссылка на картинку"
               value=""
             />
+            <span class="popup__error" id="photo-error"></span>
           </fieldset>
           <button class="popup__save" type="submit">Создать</button>
         </form>
@@ -121,6 +135,7 @@
         </div>
       </div>
     </template>
+    <script src="./scripts/validation.js"></script>
     <script src="./scripts/index.js"></script>
   </body>
 </html>
