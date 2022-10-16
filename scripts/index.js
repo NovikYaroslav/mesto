@@ -51,22 +51,54 @@ const userName = document.querySelector(".profile__name");
 const aboutUser = document.querySelector(".profile__discription");
 const cardTeamplate = document.querySelector(".cardTeamplate");
 const cardContainer = document.querySelector(".elements");
+const popups = document.querySelectorAll(".popup");
 
-function openPopupTrue(popup) {
+function openPopup(popup) {
   popup.classList.add("popup_opened");
+  popup.addEventListener("click", setMouseAction);
+  document.addEventListener("keydown", escapePopup);
+}
+
+function setMouseAction(event) {
+  if (event.target.classList.contains("popup_opened")) {
+    const currentPopup = event.target;
+    closePopup(currentPopup);
+  }
+}
+
+function escapePopup(evt) {
+  const popups = document.querySelectorAll(".popup");
+  popups.forEach(function (popup) {
+    if (evt.key == "Escape") {
+      popup.classList.remove("popup_opened");
+      document.removeEventListener("keydown", escapePopup);
+    }
+  });
 }
 
 function preparePopup(event) {
   if (event.target === userPopupOpenButton) {
-    openPopupTrue(userPopup);
+    prepareValidaton(userPopup);
+    openPopup(userPopup);
     nameInput.value = userName.textContent;
     aboutInput.value = aboutUser.textContent;
   }
   if (event.target === cardPopupOpenButton) {
-    openPopupTrue(cardPopup);
+    prepareValidaton(cardPopup);
+    openPopup(cardPopup);
     cardTitleInput.value = "";
     cardPhotoInput.value = "";
   }
+}
+
+function prepareValidaton(preparedPopup) {
+  const formElement = preparedPopup.querySelector(".popup__form");
+  const inputList = Array.from(
+    formElement.querySelectorAll(".popup-fieldset__input")
+  );
+  inputList.forEach(function (inputElement) {
+    hideInputError(formElement, inputElement);
+  });
 }
 
 function closePopup(openedPopup) {
@@ -78,6 +110,7 @@ function savePopup(evt) {
   userName.textContent = nameInput.value;
   aboutUser.textContent = aboutInput.value;
   closePopup(userPopup);
+  restoreButtonState(userPopup);
 }
 
 function createCard(item) {
@@ -85,7 +118,7 @@ function createCard(item) {
   const initialCardTitle = initialCard.querySelector(".element__text");
   const initialCardPhoto = initialCard.querySelector(".element__photo");
   initialCardPhoto.addEventListener("click", function () {
-    openPopupTrue(photoPopup);
+    openPopup(photoPopup);
     popupPhoto.src = initialCardPhoto.src;
     popupPhoto.alt = initialCardPhoto.alt;
     popupPhotoCapture.textContent = initialCardTitle.textContent;
@@ -118,6 +151,13 @@ function addNewCard(evt) {
   const newCard = createCard(additionalCard);
   cardContainer.prepend(newCard);
   closePopup(cardPopup);
+  restoreButtonState(cardPopup);
+}
+
+function restoreButtonState(popup) {
+  const saveButton = popup.querySelector(elements.sumbitButtons);
+  saveButton.classList.add("popup__save_inactive");
+  saveButton.setAttribute("disabled", true);
 }
 
 function likeCard(event) {
@@ -125,7 +165,7 @@ function likeCard(event) {
 }
 
 function deleteCard(event) {
-  const element = event.target.closest(".element")
+  const element = event.target.closest(".element");
   element.remove();
 }
 
