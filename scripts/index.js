@@ -53,18 +53,26 @@ const cardTeamplate = document.querySelector(".cardTeamplate");
 const cardContainer = document.querySelector(".elements");
 const popups = document.querySelectorAll(".popup");
 
-function openPopupTrue(popup) {
+function openPopup(popup) {
   popup.classList.add("popup_opened");
+  document.addEventListener("keydown", function escapePopup (evt) {
+    if (evt.key == "Escape") {
+      closePopup(popup)
+      console.log("dasd")
+    }
+  } );
 }
+
+// Нужно корректно поставить и удалить слушатель
 
 function preparePopup(event) {
   if (event.target === userPopupOpenButton) {
-    openPopupTrue(userPopup);
+    openPopup(userPopup);
     nameInput.value = userName.textContent;
-    aboutInput.value = aboutUser.textContent;
+    aboutInput.value = aboutUser.textContent; 
   }
   if (event.target === cardPopupOpenButton) {
-    openPopupTrue(cardPopup);
+    openPopup(cardPopup);
     cardTitleInput.value = "";
     cardPhotoInput.value = "";
   }
@@ -72,13 +80,11 @@ function preparePopup(event) {
 
 function closePopup(openedPopup) {
   openedPopup.classList.remove("popup_opened");
+  document.removeEventListener("keydown", escapePopup);
 }
 
 function escapePopup(evt) {
   if (evt.key == "Escape") {
-    userPopup.classList.remove("popup_opened");
-    cardPopup.classList.remove("popup_opened");
-    photoPopup.classList.remove("popup_opened");
   }
 }
 
@@ -161,4 +167,3 @@ userPopupOpenButton.addEventListener("click", preparePopup);
 cardPopupOpenButton.addEventListener("click", preparePopup);
 profileFormElement.addEventListener("submit", savePopup);
 cardFormElement.addEventListener("submit", addNewCard);
-document.addEventListener("keydown", escapePopup);
