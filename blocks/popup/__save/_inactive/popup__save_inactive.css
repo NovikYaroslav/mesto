@@ -16,6 +16,11 @@
   opacity: 0.2;
 }
 
+.popup__save:hover {
+  cursor: auto;
+  opacity: 0.2;
+}
+
 @media screen and (max-width: 600px) {
   .popup__save-inactive {
     width: 238px;

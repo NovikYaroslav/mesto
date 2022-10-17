@@ -1,12 +1,3 @@
-const elements = {
-  popup: ".popup",
-  forms: ".popup__form",
-  inputs: ".popup-fieldset__input",
-  sumbitButtons: ".popup__save",
-  sumbitButtonsInactive: "popup__save_inactive",
-  inputsError: "popup__error",
-};
-
 //   берет все формы,создает массив и на каждую форму вешает слушатель (отмена отправки) и вызывает функцию на каждую форму.
 function enableValidation(elements) {
   const formList = Array.from(document.querySelectorAll(elements.forms));
@@ -17,8 +8,6 @@ function enableValidation(elements) {
     setEventListeners(formElement, elements);
   });
 }
-
-enableValidation(elements);
 
 //  создает массив из всех инпутов каждой формы и вешает на них слушатель который запускате 2 функции:
 // 1. проверяет инпутs, соотвествуют ли введенные данные, требованиям.
@@ -39,23 +28,28 @@ function setEventListeners(formElement, elements) {
 //   проверяет валидна ли форма и каждый инпут в отдельности.
 function checkInputValidity(formElement, inputElement, elements) {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+    showInputError(
+      formElement,
+      inputElement,
+      inputElement.validationMessage,
+      elements
+    );
   } else {
     hideInputError(formElement, inputElement, elements);
   }
 }
 
 // если форма невалидна, показывает браузерное сообщение об ошибке и выделяет поле
-function showInputError(formElement, inputElement, errorMessage) {
+function showInputError(formElement, inputElement, errorMessage, elements) {
   const errorElement = formElement.querySelector(`#${inputElement.name}-error`);
+  inputElement.classList.add(elements.inputsError);
   errorElement.textContent = errorMessage;
-  inputElement.style.setProperty("border-bottom", "1px solid red");
 }
 // если форма валидна, очишает браузерное сообщение об ошибке.
 function hideInputError(formElement, inputElement, elements) {
   const errorElement = formElement.querySelector(`#${inputElement.name}-error`);
+  inputElement.classList.remove(elements.inputsError);
   errorElement.textContent = "";
-  inputElement.style.removeProperty("border-bottom", "1px solid red");
 }
 
 // проверяет все инпуты, на предмет неваладиности хотя бы одного.
@@ -77,3 +71,19 @@ function toggleButtonState(inputList, buttonElement, elements) {
     buttonElement.removeAttribute("disabled");
   }
 }
+
+function prepareValidaton(preparedPopup) {
+  const formElement = preparedPopup.querySelector(elements.forms);
+  const inputList = Array.from(formElement.querySelectorAll(elements.inputs));
+  inputList.forEach(function (inputElement) {
+    hideInputError(formElement, inputElement, elements);
+  });
+}
+
+function restoreButtonState(popup) {
+  const saveButton = popup.querySelector(elements.sumbitButtons);
+  saveButton.classList.add(elements.sumbitButtonsInactive);
+  saveButton.setAttribute("disabled", true);
+}
+
+enableValidation(elements);
