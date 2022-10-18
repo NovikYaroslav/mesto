@@ -71,6 +71,7 @@ function prepareCardPopup() {
 }
 
 function closePopup(openedPopup) {
+  openedPopup.removeEventListener("click", setMouseAction);
   document.removeEventListener("keydown", escapePopup);
   openedPopup.classList.remove("popup_opened");
 }
@@ -108,7 +109,6 @@ function preparePhotoPopup(initialCardPhoto, initialCardTitle) {
     popupPhoto.src = initialCardPhoto.src;
     popupPhoto.alt = initialCardPhoto.alt;
     popupPhotoCapture.textContent = initialCardTitle.textContent;
-    photoPopup.classList.add("popup_for_photo");
     openPopup(photoPopup);
   });
 }

@@ -22,7 +22,7 @@
 }
 
 @media screen and (max-width: 600px) {
-  .popup__save-inactive {
+  .popup__save_inactive {
     width: 238px;
     height: 46px;
     margin-top: 45px;
