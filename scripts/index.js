@@ -84,25 +84,25 @@ function savePopup(evt) {
   restoreButtonState(userPopup);
 }
 
-function createCard(item) {
-  const initialCard = cardTeamplate.content
-    .querySelector(".element")
-    .cloneNode(true);
-  const initialCardTitle = initialCard.querySelector(".element__text");
-  const initialCardPhoto = initialCard.querySelector(".element__photo");
-  const deleteButton = initialCard.querySelector(".element__delete-button");
-  const likeButton = initialCard.querySelector(".element__like-button");
-  initialCardPhoto.addEventListener(
-    "click",
-    preparePhotoPopup(initialCardPhoto, initialCardTitle)
-  );
-  deleteButton.addEventListener("click", deleteCard);
-  likeButton.addEventListener("click", likeCard);
-  initialCardTitle.textContent = item.name;
-  initialCardPhoto.src = item.link;
-  initialCardPhoto.alt = item.name;
-  return initialCard;
-}
+// function createCard(item) {
+//   const initialCard = cardTeamplate.content
+//     .querySelector(".element")
+//     .cloneNode(true);
+//   const initialCardTitle = initialCard.querySelector(".element__text");
+//   const initialCardPhoto = initialCard.querySelector(".element__photo");
+//   const deleteButton = initialCard.querySelector(".element__delete-button");
+//   const likeButton = initialCard.querySelector(".element__like-button");
+//   initialCardPhoto.addEventListener(
+//     "click",
+//     preparePhotoPopup(initialCardPhoto, initialCardTitle)
+//   );
+//   deleteButton.addEventListener("click", deleteCard);
+//   likeButton.addEventListener("click", likeCard);
+//   initialCardTitle.textContent = item.name;
+//   initialCardPhoto.src = item.link;
+//   initialCardPhoto.alt = item.name;
+//   return initialCard;
+// }
 
 function preparePhotoPopup(initialCardPhoto, initialCardTitle) {
   initialCardPhoto.addEventListener("click", function () {
