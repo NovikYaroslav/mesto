@@ -1,3 +1,5 @@
+import { elements } from "./data.js";
+
 //   берет все формы,создает массив и на каждую форму вешает слушатель (отмена отправки) и вызывает функцию на каждую форму.
 function enableValidation(elements) {
   const formList = Array.from(document.querySelectorAll(elements.forms));
@@ -72,7 +74,7 @@ function toggleButtonState(inputList, buttonElement, elements) {
   }
 }
 
-function prepareValidaton(preparedPopup) {
+export function prepareValidaton(preparedPopup) {
   const formElement = preparedPopup.querySelector(elements.forms);
   const inputList = Array.from(formElement.querySelectorAll(elements.inputs));
   inputList.forEach(function (inputElement) {
@@ -80,7 +82,7 @@ function prepareValidaton(preparedPopup) {
   });
 }
 
-function restoreButtonState(popup) {
+export function restoreButtonState(popup) {
   const saveButton = popup.querySelector(elements.sumbitButtons);
   saveButton.classList.add(elements.sumbitButtonsInactive);
   saveButton.setAttribute("disabled", true);
