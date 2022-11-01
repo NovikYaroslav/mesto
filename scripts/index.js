@@ -5,12 +5,12 @@ import {Card} from "./card.js"
 
 const userPopupOpenButton = document.querySelector(".profile__edit-button");
 const cardPopupOpenButton = document.querySelector(".profile__add-button");
-const popupPhoto = document.querySelector(".popup__photo");
-const popupPhotoCapture = document.querySelector(".popup__photo-capture");
-const cardText = document.querySelector(".element__text");
+// const popupPhoto = document.querySelector(".popup__photo");
+// const popupPhotoCapture = document.querySelector(".popup__photo-capture");
+// const cardText = document.querySelector(".element__text");
 const userPopup = document.querySelector(".popup_for_user");
 const cardPopup = document.querySelector(".popup_for_card");
-const photoPopup = document.querySelector(".popup_for_photo");
+// const photoPopup = document.querySelector(".popup_for_photo");
 const closeButtons = document.querySelectorAll(".popup__close");
 const profileFormElement = userPopup.querySelector('[name="user-profile"]');
 const cardFormElement = document.querySelector('[name="user-card"]');
@@ -28,9 +28,9 @@ const cardPhotoInput = document.querySelector(
 );
 const userName = document.querySelector(".profile__name");
 const aboutUser = document.querySelector(".profile__discription");
-const cardTeamplate = document.querySelector(".cardTeamplate");
+// const cardTeamplate = document.querySelector(".cardTeamplate");
 const cardContainer = document.querySelector(".elements");
-const popups = document.querySelectorAll(".popup");
+// const popups = document.querySelectorAll(".popup");
 
 function openPopup(popup) {
   popup.classList.add("popup_opened");
@@ -47,7 +47,7 @@ function setMouseAction(event) {
 
 function escapePopup(event) {
   if (event.key == "Escape") {
-    console.log("hi")
+    console.log()
     const targetPopup = document.querySelector(".popup_opened");
     closePopup(targetPopup);
   }
@@ -110,14 +110,13 @@ function savePopup(evt) {
 //   return initialCard;
 // }
 
-// export function preparePhotoPopup(initialCardPhoto, initialCardTitle) {
-//   const popupPhoto = document.querySelector(".popup__photo");
-//   const popupPhotoCapture = document.querySelector(".popup__photo-capture");
+// function preparePhotoPopup(initialCardPhoto, initialCardTitle) {
+//   initialCardPhoto.addEventListener("click", function () {
 //     popupPhoto.src = initialCardPhoto.src;
 //     popupPhoto.alt = initialCardPhoto.alt;
 //     popupPhotoCapture.textContent = initialCardTitle.textContent;
 //     openPopup(photoPopup);
-
+//   });
 // }
 
 // function loadCards() {
@@ -133,7 +132,7 @@ function addNewCard(evt) {
     name: cardTitleInput.value,
     link: cardPhotoInput.value,
   };
-  const newCard = new Card(additionalCard, ".cardTeamplate");
+  const newCard = new Card(additionalCard, ".cardTeamplate", openPopup);
   const newCardElement = newCard.generateCard();
   cardContainer.prepend(newCardElement);
   closePopup(cardPopup);
@@ -155,6 +154,14 @@ closeButtons.forEach(function (closeButton) {
     closePopup(popup);
   });
 });
+
+initialCards.forEach((item) => {
+  const card = new Card(item, ".cardTeamplate", openPopup);
+  const cardElement = card.generateCard();
+  document.querySelector(".elements").prepend(cardElement);
+});
+
+
 
 userPopupOpenButton.addEventListener("click", preparePopup);
 cardPopupOpenButton.addEventListener("click", preparePopup);
