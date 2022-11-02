@@ -1,5 +1,3 @@
-
-
 export const initialCards = [
   {
     name: "Архыз",
@@ -27,9 +25,7 @@ export const initialCards = [
   },
 ];
 
-
 export const elements = {
-  popup: ".popup",
   forms: ".popup__form",
   inputs: ".popup-fieldset__input",
   submitButtons: ".popup__save",

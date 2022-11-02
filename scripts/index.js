@@ -1,6 +1,6 @@
 import { initialCards, elements } from "./data.js";
 import { FormValidator } from "./FormValidator.js";
-import { Card } from "./card.js";
+import { Card } from "./Сard.js";
 
 const userPopupOpenButton = document.querySelector(".profile__edit-button");
 const cardPopupOpenButton = document.querySelector(".profile__add-button");
@@ -24,13 +24,6 @@ const cardPhotoInput = document.querySelector(
 const userName = document.querySelector(".profile__name");
 const aboutUser = document.querySelector(".profile__discription");
 const cardContainer = document.querySelector(".elements");
-
-// function restoreButtonState(popup) {
-//   console.log("restoreButtonState")
-//   const saveButton = popup.querySelector(CardFormValidator.this.submitButtons);
-//   saveButton.classList.add(this.submitButtonsInactive);
-//   saveButton.setAttribute("disabled", true);
-// }
 
 function openPopup(popup) {
   popup.classList.add("popup_opened");
@@ -63,22 +56,19 @@ function preparePopup(event) {
 }
 
 function prepareUserPopup() {
-  const profileFormValidator = new FormValidator(
-    elements,
-    profileFormElement,
-  );
-  profileFormValidator.enableValidation();
   openPopup(userPopup);
   nameInput.value = userName.textContent;
   aboutInput.value = aboutUser.textContent;
+  const profileFormValidator = new FormValidator(elements, profileFormElement);
+  profileFormValidator.enableValidation();
 }
 
 function prepareCardPopup() {
-  const CardFormValidator = new FormValidator(elements, cardFormElement);
-  CardFormValidator.enableValidation();
   openPopup(cardPopup);
   cardTitleInput.value = "";
   cardPhotoInput.value = "";
+  const CardFormValidator = new FormValidator(elements, cardFormElement);
+  CardFormValidator.enableValidation();
 }
 
 function closePopup(openedPopup) {
@@ -92,7 +82,6 @@ function savePopup(evt) {
   userName.textContent = nameInput.value;
   aboutUser.textContent = aboutInput.value;
   closePopup(userPopup);
-  // restoreButtonState(userPopup);
 }
 
 function addNewCard(evt) {
@@ -105,7 +94,6 @@ function addNewCard(evt) {
   const newCardElement = newCard.generateCard();
   cardContainer.prepend(newCardElement);
   closePopup(cardPopup);
-  // restoreButtonState(cardPopup);
 }
 
 closeButtons.forEach(function (closeButton) {
