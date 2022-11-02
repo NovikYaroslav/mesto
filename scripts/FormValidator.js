@@ -1,4 +1,3 @@
-
 export class FormValidator {
   constructor(elements, formElement) {
     this.popup = elements.popup;
@@ -7,7 +6,7 @@ export class FormValidator {
     this.submitButtons = elements.submitButtons;
     this.submitButtonsInactive = elements.submitButtonsInactive;
     this.inputsError = elements.inputsError;
-    this.formElement = formElement
+    this.formElement = formElement;
   }
 
   _checkInputValidity = (formElement, inputElement) => {
@@ -16,62 +15,68 @@ export class FormValidator {
       this._showInputError(
         formElement,
         inputElement,
-        inputElement.validationMessage,
+        inputElement.validationMessage
       );
     } else {
       this._hideInputError(formElement, inputElement);
     }
-  }
+  };
 
   _showInputError = (formElement, inputElement, errorMessage) => {
     // console.log("ShowErrors")
-    const errorElement = formElement.querySelector(`#${inputElement.name}-error`);
+    const errorElement = formElement.querySelector(
+      `#${inputElement.name}-error`
+    );
     inputElement.classList.add(this.inputsError);
     errorElement.textContent = errorMessage;
-  }
+  };
 
   _hideInputError = (formElement, inputElement) => {
     // console.log("HideErrors")
-    const errorElement = formElement.querySelector(`#${inputElement.name}-error`);
+    const errorElement = formElement.querySelector(
+      `#${inputElement.name}-error`
+    );
     inputElement.classList.remove(this.inputsError);
     errorElement.textContent = "";
-  }
+  };
 
-  _hasInvalidInput= (inputList) => {
+  _hasInvalidInput = (inputList) => {
     // console.log("hasInvalidInput")
     return inputList.some(function (inputElement) {
       return !inputElement.validity.valid;
     });
-  }
-  
-  _prepareValidaton = (preparedPopup) => {
-    // console.log("prepareValidation")
-    const formElement = preparedPopup.querySelector(this.forms);
-    const inputList = Array.from(formElement.querySelectorAll(this.inputs));
+  };
+
+  _prepareValidaton = () => {
+    console.log("prepareValidation");
+    
+    const inputList = Array.from(
+      this.formElement.querySelectorAll(this.inputs)
+    );
     inputList.forEach((inputElement) => {
-      this._hideInputError(formElement, inputElement, elements);
+      this._hideInputError(this.formElement, inputElement);
     });
-  }
-  
+  };
+
   _restoreButtonState = () => {
-    console.log("restoreButtonState")
+    console.log("restoreButtonState");
     const saveButton = this.formElement.querySelector(this.submitButtons);
     saveButton.classList.add(this.submitButtonsInactive);
     saveButton.setAttribute("disabled", true);
-  }
+  };
 
   _setEventListeners = (formElement) => {
     // console.log("Listeners enabled")
     const inputList = Array.from(formElement.querySelectorAll(this.inputs));
-    const saveButton = formElement.querySelector(this.submitButtons) 
-    inputList.forEach( (inputElement) => {
+    const saveButton = formElement.querySelector(this.submitButtons);
+    inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(formElement, inputElement);
         this._toggleButtonState(inputList, saveButton);
       });
       this._toggleButtonState(inputList, saveButton);
     });
-  }
+  };
 
   _toggleButtonState = (inputList, buttonElement) => {
     // console.log("toggleButtonState")
@@ -83,21 +88,17 @@ export class FormValidator {
       buttonElement.classList.add(this.submitButtons);
       buttonElement.removeAttribute("disabled");
     }
-  }
+  };
 
-    enableValidation = () => {
-    // console.log("enable validation")
-    // this._restoreButtonState();
-      this.formElement.addEventListener("submit", (evt) => {
-      evt.preventDefault();})
-      this._setEventListeners(this.formElement);
-  }
+  enableValidation = () => {
+    console.log("enable validation")
+    this._prepareValidaton();
+    this.formElement.addEventListener("submit", (evt) => {
+      evt.preventDefault();
+    });
+    this._setEventListeners(this.formElement);
+  };
 }
-
-
-
-
-
 
 //   берет все формы,создает массив и на каждую форму вешает слушатель (отмена отправки) и вызывает функцию на каждую форму.
 // function enableValidation(elements) {
@@ -187,4 +188,4 @@ export class FormValidator {
 //   saveButton.setAttribute("disabled", true);
 // }
 
-// 
+//
