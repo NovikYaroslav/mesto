@@ -49,7 +49,7 @@ export class FormValidator {
 
   _prepareValidaton = () => {
     console.log("prepareValidation");
-    
+    this._restoreButtonState();
     const inputList = Array.from(
       this.formElement.querySelectorAll(this.inputs)
     );

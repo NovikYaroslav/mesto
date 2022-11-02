@@ -65,7 +65,7 @@ function preparePopup(event) {
 function prepareUserPopup() {
   const profileFormValidator = new FormValidator(
     elements,
-    profileFormElement
+    profileFormElement,
   );
   profileFormValidator.enableValidation();
   openPopup(userPopup);
