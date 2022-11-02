@@ -32,7 +32,7 @@ export const elements = {
   popup: ".popup",
   forms: ".popup__form",
   inputs: ".popup-fieldset__input",
-  sumbitButtons: ".popup__save",
-  sumbitButtonsInactive: "popup__save_inactive",
+  submitButtons: ".popup__save",
+  submitButtonsInactive: "popup__save_inactive",
   inputsError: "popup-fieldset__input_error",
 };
