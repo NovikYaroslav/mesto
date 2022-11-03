@@ -1,9 +1,9 @@
 export class Card {
-  constructor(data, templateSelector, openPopup) {
+  constructor(data, templateSelector, openCard) {
     this.cardName = data.name;
     this.cardPhoto = data.link;
     this.templateSelector = templateSelector;
-    this._openPopup = openPopup;
+    this._openCard = openCard;
   }
 
   _getTemplate() {
@@ -25,36 +25,27 @@ export class Card {
     return this._element;
   }
 
-  _likeCard(likeButton) {
-    likeButton.classList.toggle("element__like-button_active");
+  _likeCard() {
+    this._likeButton.classList.toggle("element__like-button_active");
   }
 
-  _deleteButton() {
+  _deleteCard() {
     this._element.remove();
-  }
-
-  _OpenCard() {
-    const photoPopup = document.querySelector(".popup_for_photo");
-    const popupPhoto = document.querySelector(".popup__photo");
-    const popupPhotoCapture = document.querySelector(".popup__photo-capture");
-    popupPhoto.src = this.cardPhoto;
-    popupPhoto.alt = this.cardName;
-    popupPhotoCapture.textContent = this.cardName;
-    this._openPopup(photoPopup);
+    this._element = null;
   }
 
   _setEventListeners() {
-    const likeButton = this._element.querySelector(".element__like-button");
-    likeButton.addEventListener("click", () => {
-      this._likeCard(likeButton);
+    this._likeButton = this._element.querySelector(".element__like-button");
+    this._likeButton.addEventListener("click", () => {
+      this._likeCard();
     });
-    const deleteButton = this._element.querySelector(".element__delete-button");
-    deleteButton.addEventListener("click", () => {
-      this._deleteButton();
+    this._deleteButton = this._element.querySelector(".element__delete-button");
+    this._deleteButton.addEventListener("click", () => {
+      this._deleteCard();
     });
-    const initialCardPhoto = this._element.querySelector(".element__photo");
-    initialCardPhoto.addEventListener("click", () => {
-      this._OpenCard();
+    this._cardImage = this._element.querySelector(".element__photo");
+    this._cardImage.addEventListener("click", () => {
+      this._openCard(this.cardPhoto, this.cardName);
     });
   }
 }
