@@ -28,14 +28,16 @@ const userName = document.querySelector(".profile__name");
 const aboutUser = document.querySelector(".profile__discription");
 const cardContainer = document.querySelector(".elements");
 
-const Validator = new FormValidator(elements)
-Validator.enableValidation()
-
+const profileFormValidator = new FormValidator(elements, profileFormElement);
+profileFormValidator.enableValidation();
+const cardFormValidator = new FormValidator(elements, cardFormElement);
+cardFormValidator.enableValidation();
 
 function openPopup(popup) {
   popup.classList.add("popup_opened");
   popup.addEventListener("click", setMouseAction);
   document.addEventListener("keydown", escapePopup);
+  clearPopup(popup);
 }
 
 function setMouseAction(event) {
@@ -57,22 +59,29 @@ function prepareUserPopup() {
   openPopup(userPopup);
   nameInput.value = userName.textContent;
   aboutInput.value = aboutUser.textContent;
-  // const profileFormValidator = new FormValidator(elements, profileFormElement);
-  // profileFormValidator.enableValidation();
 }
 
 function prepareCardPopup() {
   openPopup(cardPopup);
   cardTitleInput.value = "";
   cardPhotoInput.value = "";
-  // const CardFormValidator = new FormValidator(elements, cardFormElement);
-  // CardFormValidator.enableValidation();
 }
 
 function closePopup(openedPopup) {
   openedPopup.removeEventListener("click", setMouseAction);
   document.removeEventListener("keydown", escapePopup);
   openedPopup.classList.remove("popup_opened");
+}
+
+function clearPopup(currentPopup) {
+  const errors = currentPopup.querySelectorAll(".popup__error");
+  const inputs = currentPopup.querySelectorAll(elements.inputs);
+  errors.forEach(function (error) {
+    error.textContent = " ";
+  });
+  inputs.forEach(function (input) {
+    input.classList.remove(elements.inputsError);
+  });
 }
 
 function savePopup(evt) {
@@ -84,7 +93,7 @@ function savePopup(evt) {
 
 function addNewCard(evt) {
   evt.preventDefault();
-  const newCard = createCard()
+  const newCard = createCard();
   cardContainer.prepend(newCard);
   closePopup(cardPopup);
 }
@@ -96,7 +105,7 @@ function createCard() {
   };
   const newCard = new Card(additionalCard, ".cardTeamplate", openCard);
   const newCardElement = newCard.generateCard();
-  return newCardElement
+  return newCardElement;
 }
 
 function openCard(link, name) {

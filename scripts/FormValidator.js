@@ -7,15 +7,14 @@ export class FormValidator {
     this._inputsError = elements.inputsError;
     this._formElement = formElement;
     this._saveButton = this._formElement.querySelector(this._submitButtons);
-    this._inputList = Array.from(this._formElement.querySelectorAll(this._inputs));
+    this._inputList = Array.from(
+      this._formElement.querySelectorAll(this._inputs)
+    );
   }
 
   _checkInputValidity = (inputElement) => {
     if (!inputElement.validity.valid) {
-      this._showInputError(
-        inputElement,
-        inputElement.validationMessage
-      );
+      this._showInputError(inputElement, inputElement.validationMessage);
     } else {
       this._hideInputError(inputElement);
     }
@@ -43,13 +42,6 @@ export class FormValidator {
     });
   };
 
-  _prepareValidaton = () => {
-
-    this._inputList.forEach((inputElement) => {
-      this._hideInputError(inputElement);
-    });
-  };
-
   _setEventListeners = () => {
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
@@ -71,18 +63,6 @@ export class FormValidator {
   };
 
   enableValidation = () => {
-    console.log("enable validation");
-    
-    // this._prepareValidaton();
     this._setEventListeners();
   };
-
 }
-
-// function restoreButtonState(popup) {
-//   const saveButton = popup.querySelector(elements.sumbitButtons);
-//   saveButton.classList.add(elements.sumbitButtonsInactive);
-//   saveButton.setAttribute("disabled", true);
-// }
-
-
