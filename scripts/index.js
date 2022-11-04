@@ -37,7 +37,6 @@ function openPopup(popup) {
   popup.classList.add("popup_opened");
   popup.addEventListener("click", setMouseAction);
   document.addEventListener("keydown", escapePopup);
-  clearPopup(popup);
 }
 
 function setMouseAction(event) {
@@ -59,12 +58,14 @@ function prepareUserPopup() {
   openPopup(userPopup);
   nameInput.value = userName.textContent;
   aboutInput.value = aboutUser.textContent;
+  profileFormValidator.resetValidation();
 }
 
 function prepareCardPopup() {
   openPopup(cardPopup);
   cardTitleInput.value = "";
   cardPhotoInput.value = "";
+  cardFormValidator.resetValidation();
 }
 
 function closePopup(openedPopup) {
@@ -73,39 +74,10 @@ function closePopup(openedPopup) {
   openedPopup.classList.remove("popup_opened");
 }
 
-function clearPopup(currentPopup) {
-  const errors = currentPopup.querySelectorAll(".popup__error");
-  const inputs = currentPopup.querySelectorAll(elements.inputs);
-  errors.forEach(function (error) {
-    error.textContent = " ";
-  });
-  inputs.forEach(function (input) {
-    input.classList.remove(elements.inputsError);
-  });
-}
-
 function savePopup(evt) {
   evt.preventDefault();
   userName.textContent = nameInput.value;
   aboutUser.textContent = aboutInput.value;
-  closePopup(userPopup);
-}
-
-function addNewCard(evt) {
-  evt.preventDefault();
-  const newCard = createCard();
-  cardContainer.prepend(newCard);
-  closePopup(cardPopup);
-}
-
-function createCard() {
-  const additionalCard = {
-    name: cardTitleInput.value,
-    link: cardPhotoInput.value,
-  };
-  const newCard = new Card(additionalCard, ".cardTeamplate", openCard);
-  const newCardElement = newCard.generateCard();
-  return newCardElement;
 }
 
 function openCard(link, name) {
@@ -113,6 +85,23 @@ function openCard(link, name) {
   popupPhoto.alt = name;
   popupPhotoCapture.textContent = name;
   openPopup(photoPopup);
+}
+
+function createCard(cardData) {
+  const createdCard = new Card(cardData, ".cardTeamplate", openCard);
+  const createdCardElement = createdCard.generateCard();
+  return createdCardElement;
+}
+
+function addNewCard(evt) {
+  evt.preventDefault();
+  const additionalCard = {
+    name: cardTitleInput.value,
+    link: cardPhotoInput.value,
+  };
+  const newCard = createCard(additionalCard);
+  cardContainer.prepend(newCard);
+  closePopup(cardPopup);
 }
 
 closeButtons.forEach(function (closeButton) {
@@ -123,9 +112,8 @@ closeButtons.forEach(function (closeButton) {
 });
 
 initialCards.forEach((item) => {
-  const card = new Card(item, ".cardTeamplate", openCard);
-  const cardElement = card.generateCard();
-  cardContainer.prepend(cardElement);
+  const defaultCardElement = createCard(item);
+  cardContainer.prepend(defaultCardElement);
 });
 
 userPopupOpenButton.addEventListener("click", prepareUserPopup);

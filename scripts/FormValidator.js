@@ -48,9 +48,17 @@ export class FormValidator {
         this._checkInputValidity(inputElement);
         this._toggleButtonState();
       });
-      this._toggleButtonState();
     });
   };
+
+  resetValidation = () => {
+    this._toggleButtonState();
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement);
+    });
+  };
+  // Спасибо! Я просто думал, что у меня может быть только 1 публичный метод(enableValidation). 
+  // Надеюсь, теперь все корректно реализовал. 
 
   _toggleButtonState = () => {
     if (this._hasInvalidInput()) {
