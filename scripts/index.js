@@ -1,6 +1,7 @@
 import { initialCards, elements } from "./data.js";
 import { FormValidator } from "./FormValidator.js";
 import { Card } from "./Сard.js";
+import { Section } from "./Section.js";
 
 const userPopupOpenButton = document.querySelector(".profile__edit-button");
 const cardPopupOpenButton = document.querySelector(".profile__add-button");
@@ -32,7 +33,21 @@ const profileFormValidator = new FormValidator(elements, profileFormElement);
 profileFormValidator.enableValidation();
 const cardFormValidator = new FormValidator(elements, cardFormElement);
 cardFormValidator.enableValidation();
+const defaultCardList = new Section(
+  { items:
+    initialCards,
+    renderer: (cardData) => {
+      const createdCard = new Card(cardData, ".cardTeamplate", openCard);
+      const initialCardElement = createdCard.generateCard();
+      defaultCardList.addItem(initialCardElement);
+    },
+  },
+  cardContainer
+);
 
+
+
+//
 function openPopup(popup) {
   popup.classList.add("popup_opened");
   popup.addEventListener("click", setMouseAction);
@@ -87,11 +102,22 @@ function openCard(link, name) {
   openPopup(photoPopup);
 }
 
-function createCard(cardData) {
-  const createdCard = new Card(cardData, ".cardTeamplate", openCard);
-  const createdCardElement = createdCard.generateCard();
-  return createdCardElement;
-}
+// function createCard(cardData) {
+//   const createdCard = new Card(cardData, ".cardTeamplate", openCard);
+//   const createdCardElement = createdCard.generateCard();
+//   return createdCardElement;
+// }
+
+// function addNewCard(evt) {
+//   evt.preventDefault();
+//   const additionalCard = {
+//     name: cardTitleInput.value,
+//     link: cardPhotoInput.value,
+//   };
+//   const newCard = createCard(additionalCard);
+//   cardContainer.prepend(newCard);
+//   closePopup(cardPopup);
+// }
 
 function addNewCard(evt) {
   evt.preventDefault();
@@ -99,8 +125,18 @@ function addNewCard(evt) {
     name: cardTitleInput.value,
     link: cardPhotoInput.value,
   };
-  const newCard = createCard(additionalCard);
-  cardContainer.prepend(newCard);
+  const newCardList = new Section(
+    {
+      items: additionalCard,
+      renderer: (additionalCard) => {
+        const createdCard = new Card(additionalCard, ".cardTeamplate", openCard);
+        const newCardElement = createdCard.generateCard();
+        newCardList.addItem(newCardElement);
+      },
+    },
+    cardContainer
+  );
+  newCardList.renderNewItem(additionalCard)
   closePopup(cardPopup);
 }
 
@@ -111,12 +147,14 @@ closeButtons.forEach(function (closeButton) {
   });
 });
 
-initialCards.forEach((item) => {
-  const defaultCardElement = createCard(item);
-  cardContainer.prepend(defaultCardElement);
-});
+// initialCards.forEach((item) => {
+//   const defaultCardElement = createCard(item);
+//   cardContainer.prepend(defaultCardElement);
+// });
 
 userPopupOpenButton.addEventListener("click", prepareUserPopup);
 cardPopupOpenButton.addEventListener("click", prepareCardPopup);
 profileFormElement.addEventListener("submit", savePopup);
 cardFormElement.addEventListener("submit", addNewCard);
+
+defaultCardList.renderItems();
