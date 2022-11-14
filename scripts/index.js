@@ -34,8 +34,8 @@ profileFormValidator.enableValidation();
 const cardFormValidator = new FormValidator(elements, cardFormElement);
 cardFormValidator.enableValidation();
 const defaultCardList = new Section(
-  { items:
-    initialCards,
+  {
+    items: initialCards,
     renderer: (cardData) => {
       const createdCard = new Card(cardData, ".cardTeamplate", openCard);
       const initialCardElement = createdCard.generateCard();
@@ -44,8 +44,6 @@ const defaultCardList = new Section(
   },
   cardContainer
 );
-
-
 
 //
 function openPopup(popup) {
@@ -102,23 +100,6 @@ function openCard(link, name) {
   openPopup(photoPopup);
 }
 
-// function createCard(cardData) {
-//   const createdCard = new Card(cardData, ".cardTeamplate", openCard);
-//   const createdCardElement = createdCard.generateCard();
-//   return createdCardElement;
-// }
-
-// function addNewCard(evt) {
-//   evt.preventDefault();
-//   const additionalCard = {
-//     name: cardTitleInput.value,
-//     link: cardPhotoInput.value,
-//   };
-//   const newCard = createCard(additionalCard);
-//   cardContainer.prepend(newCard);
-//   closePopup(cardPopup);
-// }
-
 function addNewCard(evt) {
   evt.preventDefault();
   const additionalCard = {
@@ -129,14 +110,19 @@ function addNewCard(evt) {
     {
       items: additionalCard,
       renderer: (additionalCard) => {
-        const createdCard = new Card(additionalCard, ".cardTeamplate", openCard);
+        const createdCard = new Card(
+          additionalCard,
+          ".cardTeamplate",
+          openCard
+        );
         const newCardElement = createdCard.generateCard();
         newCardList.addItem(newCardElement);
       },
     },
     cardContainer
   );
-  newCardList.renderNewItem(additionalCard)
+  newCardList.renderItems();
+  // newCardList.renderNewItem();
   closePopup(cardPopup);
 }
 
@@ -147,14 +133,9 @@ closeButtons.forEach(function (closeButton) {
   });
 });
 
-// initialCards.forEach((item) => {
-//   const defaultCardElement = createCard(item);
-//   cardContainer.prepend(defaultCardElement);
-// });
-
 userPopupOpenButton.addEventListener("click", prepareUserPopup);
 cardPopupOpenButton.addEventListener("click", prepareCardPopup);
 profileFormElement.addEventListener("submit", savePopup);
 cardFormElement.addEventListener("submit", addNewCard);
 
-defaultCardList.renderItems();
+defaultCardList.renderItems(true);
