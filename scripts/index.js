@@ -2,7 +2,8 @@ import { initialCards, elements } from "./data.js";
 import { FormValidator } from "./FormValidator.js";
 import { Card } from "./Сard.js";
 import { Section } from "./Section.js";
-import { Popup} from "./Popup.js"
+import { Popup } from "./Popup.js";
+import { PopupWithImage } from "./PopupWithImage.js";
 
 const userPopupOpenButton = document.querySelector(".profile__edit-button");
 const cardPopupOpenButton = document.querySelector(".profile__add-button");
@@ -38,7 +39,7 @@ const defaultCardList = new Section(
   {
     items: initialCards,
     renderer: (cardData) => {
-      const createdCard = new Card(cardData, ".cardTeamplate", openCard);
+      const createdCard = new Card(cardData, ".cardTeamplate", handleCardClick);
       const initialCardElement = createdCard.generateCard();
       defaultCardList.addItem(initialCardElement);
     },
@@ -46,10 +47,7 @@ const defaultCardList = new Section(
   cardContainer
 );
 
-const popupclass = new Popup(userPopup)
-
-
-
+const popupclass = new Popup(userPopup);
 
 //
 // function openPopup(popup) {
@@ -74,8 +72,8 @@ const popupclass = new Popup(userPopup)
 // }
 
 function prepareUserPopup() {
-  popupclass.open()
-  popupclass.setEventListeners()
+  popupclass.open();
+  popupclass.setEventListeners();
   // openPopup(userPopup);
   nameInput.value = userName.textContent;
   aboutInput.value = aboutUser.textContent;
@@ -101,11 +99,10 @@ function savePopup(evt) {
   aboutUser.textContent = aboutInput.value;
 }
 
-function openCard(link, name) {
-  popupPhoto.src = link;
-  popupPhoto.alt = name;
-  popupPhotoCapture.textContent = name;
-  openPopup(photoPopup);
+function handleCardClick(link, name) {
+  const imagePopup = new PopupWithImage(photoPopup);
+  imagePopup.open(link, name);
+  imagePopup.setEventListeners();
 }
 
 function addNewCard(evt) {
@@ -121,7 +118,7 @@ function addNewCard(evt) {
         const createdCard = new Card(
           additionalCard,
           ".cardTeamplate",
-          openCard
+          handleCardClick
         );
         const newCardElement = createdCard.generateCard();
         newCardList.addItem(newCardElement);

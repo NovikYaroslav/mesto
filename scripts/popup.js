@@ -5,13 +5,11 @@ export class Popup {
 
   open() {
     this._popupSelector.classList.add("popup_opened");
-    // this._popupSelector.addEventListener("click", setMouseAction);
     document.addEventListener("keydown", this._handleEscClose.bind(this));
   }
 
   close() {
     this._popupSelector.classList.remove("popup_opened");
-    // this._popupSelector.removeEventListener("click", setMouseAction);
     document.removeEventListener("keydown", this._handleEscClose.bind(this));
   }
 
