@@ -1,0 +1,25 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "Это мой третий проэкт.\r Проект создан по методологии БЭМ. Файловая структура: Nested.\r Сайт состоит из 3х главных секций:\r 1. Заголовка\r 2. Секции с данными о пользователе и возможностью редактировать страницу.\r 3. Секции с основным содержанием, загруженным пользователем.\r 4. Подвала\r Сайт позволяет создать свою личную страницу. Поделиться фотографиями. И позволяет другим пользователем оценивать ваши фотокарточки.\r Сайт адаптирован для использования с screen reader.\r Сайт адаптирован для устройствой с разным разрешением экрана.\r Ссылка на GitPages: https://novikyaroslav.github.io/mesto/",
+  "main": ".gitignore.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NovikYaroslav/mesto.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NovikYaroslav/mesto/issues"
+  },
+  "homepage": "https://github.com/NovikYaroslav/mesto#readme",
+  "devDependencies": {
+    "webpack": "^5.75.0",
+    "webpack-dev-server": "^4.11.1"
+  }
+}
