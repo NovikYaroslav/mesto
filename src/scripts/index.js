@@ -6,6 +6,8 @@ import { PopupWithImage } from "./PopupWithImage.js";
 import { PopupWithForm } from "./PopupWithForm.js";
 import { UserInfo } from "./UserInfo.js";
 
+import '../pages/index.css'; // добавьте импорт главного файла стилей 
+
 const userPopupOpenButton = document.querySelector(".profile__edit-button");
 const cardPopupOpenButton = document.querySelector(".profile__add-button");
 const profileFormElement = document.querySelector('[name="user-profile"]');
