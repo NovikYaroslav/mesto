@@ -2,8 +2,8 @@ import { initialCards, elements } from "./data.js";
 import { FormValidator } from "./FormValidator.js";
 import { Card } from "./Сard.js";
 import { Section } from "./Section.js";
-import { Popup } from "./Popup.js";
 import { PopupWithImage } from "./PopupWithImage.js";
+import { PopupWithForm } from "./PopupWithForm.js";
 
 const userPopupOpenButton = document.querySelector(".profile__edit-button");
 const cardPopupOpenButton = document.querySelector(".profile__add-button");
@@ -47,7 +47,9 @@ const defaultCardList = new Section(
   cardContainer
 );
 
-const popupclass = new Popup(userPopup);
+
+const cardPopupClass = new PopupWithForm(cardPopup, addNewCard)
+const userPopupClass = new PopupWithForm(userPopup, savePopup)
 
 //
 // function openPopup(popup) {
@@ -72,8 +74,8 @@ const popupclass = new Popup(userPopup);
 // }
 
 function prepareUserPopup() {
-  popupclass.open();
-  popupclass.setEventListeners();
+  userPopupClass.open();
+  userPopupClass.setEventListeners();
   // openPopup(userPopup);
   nameInput.value = userName.textContent;
   aboutInput.value = aboutUser.textContent;
@@ -81,7 +83,9 @@ function prepareUserPopup() {
 }
 
 function prepareCardPopup() {
-  openPopup(cardPopup);
+cardPopupClass.open()
+cardPopupClass.setEventListeners()
+  // openPopup(cardPopup);
   cardTitleInput.value = "";
   cardPhotoInput.value = "";
   cardFormValidator.resetValidation();
@@ -97,6 +101,7 @@ function savePopup(evt) {
   evt.preventDefault();
   userName.textContent = nameInput.value;
   aboutUser.textContent = aboutInput.value;
+  userPopupClass.close()
 }
 
 function handleCardClick(link, name) {
@@ -128,7 +133,8 @@ function addNewCard(evt) {
   );
   newCardList.renderItems();
   // newCardList.renderNewItem();
-  closePopup(cardPopup);
+  cardPopupClass.close()
+  // closePopup(cardPopup);
 }
 
 // closeButtons.forEach(function (closeButton) {
@@ -140,7 +146,7 @@ function addNewCard(evt) {
 
 userPopupOpenButton.addEventListener("click", prepareUserPopup);
 cardPopupOpenButton.addEventListener("click", prepareCardPopup);
-profileFormElement.addEventListener("submit", savePopup);
-cardFormElement.addEventListener("submit", addNewCard);
+// profileFormElement.addEventListener("submit", savePopup);
+// cardFormElement.addEventListener("submit", addNewCard);
 
 defaultCardList.renderItems(true);

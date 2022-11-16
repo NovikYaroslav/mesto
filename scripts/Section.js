@@ -3,7 +3,6 @@ export class Section {
     this._items = items;
     this._renderer = renderer;
     this._container = containerSelector;
-    console.log(this._items);
   }
 
   // renderNewItem() {
