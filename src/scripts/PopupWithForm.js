@@ -4,13 +4,14 @@ export class PopupWithForm extends Popup {
   constructor(popupSelector, submitFormCallback) {
     super(popupSelector);
     this._submitFormCallback = submitFormCallback;
-    this._popupFormElement = this._popupSelector.querySelector(".popup__form");
+    this._popupFormElement = this._popup.querySelector(".popup__form");
     this._inputsList = this._popupFormElement.querySelectorAll(
       ".popup-fieldset__input"
     );
   }
 
   _getInputValues() {
+    // к сожалению, я не понимаю, как это обойтись без сохранения обьекта, т.к. без него данные не сохраняются. 
     this._inputs = {};
     this._inputsList.forEach((input) => {
       this._inputs[input.name] = [input.value];
@@ -20,12 +21,13 @@ export class PopupWithForm extends Popup {
 
   setEventListeners() {
     super.setEventListeners();
-    this._popupFormElement.addEventListener("submit", this._submitFormCallback);
+    this._popupFormElement.addEventListener("submit", (evt) => {
+      this._submitFormCallback(evt, this._getInputValues());
+    });
   }
 
   close() {
     super.close();
-    this._getInputValues();
     this._popupFormElement.reset();
   }
 }

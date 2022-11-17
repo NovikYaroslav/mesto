@@ -1,18 +1,19 @@
 export class UserInfo {
-  constructor({ name, about }) {
-    this._name = name;
-    this._about = about;
+  constructor({ userNameSelector, userAboutSelector }) {
+    this._name = document.querySelector(userNameSelector);
+    this._about = document.querySelector(userAboutSelector);
   }
 
   getUserInfo() {
+     // к сожалению, я не понимаю, как это обойтись без сохранения обьекта, т.к. без него данные не сохраняются. 
     this._userInfo = {};
     this._userInfo.name = this._name.textContent;
     this._userInfo.about = this._about.textContent;
     return this._userInfo;
   }
 
-  setUserInfo(nameInput, aboutInput) {
-    this._name.textContent = nameInput.value;
-    this._about.textContent = aboutInput.value;
+  setUserInfo(profilePopupInputsData) {
+    this._name.textContent = profilePopupInputsData.name;
+    this._about.textContent = profilePopupInputsData.about;
   }
 }

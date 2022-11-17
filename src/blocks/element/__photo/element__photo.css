@@ -3,6 +3,8 @@
     height: 282px;
     object-fit: cover;
     border-radius: 10px 10px 0px 0px;
+    background-color: black;
+    color: white;
   }
 
   .element__photo:hover {

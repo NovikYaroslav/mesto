@@ -5,18 +5,8 @@ export class Section {
     this._container = document.querySelector(containerSelector);
   }
 
-  // renderNewItem() {
-  //     this._renderer(this._items)
-  // }
-
-  renderItems(defaultCardList) {
-    if (defaultCardList == true) {
-      this._items.forEach((item) => {
-        this._renderer(item);
-      });
-    } else {
-      this._renderer(this._items);
-    }
+  renderItems() {
+    this._items.forEach(this._renderer);
   }
 
   addItem(card) {
