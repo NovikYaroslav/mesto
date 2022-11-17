@@ -11,7 +11,7 @@ export class PopupWithForm extends Popup {
   }
 
   _getInputValues() {
-    // к сожалению, я не понимаю, как это обойтись без сохранения обьекта, т.к. без него данные не сохраняются. 
+    // к сожалению, я не понимаю, как обойтись без сохранения обьекта, т.к. без него данные не сохраняются. 
     this._inputs = {};
     this._inputsList.forEach((input) => {
       this._inputs[input.name] = [input.value];

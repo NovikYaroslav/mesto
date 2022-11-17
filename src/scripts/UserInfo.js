@@ -5,7 +5,7 @@ export class UserInfo {
   }
 
   getUserInfo() {
-     // к сожалению, я не понимаю, как это обойтись без сохранения обьекта, т.к. без него данные не сохраняются. 
+     // к сожалению, я не понимаю, как обойтись без сохранения обьекта, т.к. без него данные не сохраняются. 
     this._userInfo = {};
     this._userInfo.name = this._name.textContent;
     this._userInfo.about = this._about.textContent;
