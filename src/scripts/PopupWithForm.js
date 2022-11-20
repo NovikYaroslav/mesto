@@ -8,11 +8,12 @@ export class PopupWithForm extends Popup {
     this._inputsList = this._popupFormElement.querySelectorAll(
       ".popup-fieldset__input"
     );
+    this._inputs = {};
   }
 
   _getInputValues() {
-    // к сожалению, я не понимаю, как обойтись без сохранения обьекта, т.к. без него данные не сохраняются. 
-    this._inputs = {};
+    // Учитывая, что здесь я прохожусь по массиву, то реализовать аналогично UserInfo не получилось.
+    // Вынес this._inputs в конструктор. тут только собрал для него данные. Вроде он не должен сохраняться и храниться в памяти.
     this._inputsList.forEach((input) => {
       this._inputs[input.name] = [input.value];
     });

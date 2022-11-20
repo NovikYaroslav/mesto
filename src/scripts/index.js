@@ -24,13 +24,13 @@ profileFormValidator.enableValidation();
 const cardFormValidator = new FormValidator(elements, cardFormElement);
 cardFormValidator.enableValidation();
 
-const CardList = new Section(
+const cardList = new Section(
   {
     items: initialCards,
     renderer: (cardData) => {
       const createdCard = new Card(cardData, ".cardTeamplate", handleCardClick);
       const initialCardElement = createdCard.generateCard();
-      CardList.addItem(initialCardElement);
+      cardList.addItem(initialCardElement);
     },
   },
   ".elements"
@@ -80,7 +80,7 @@ function addNewCard(evt, cardPopupInputsData) {
   evt.preventDefault();
   createCard(cardPopupInputsData);
   const newCard = createCard(cardPopupInputsData);
-  CardList.addItem(newCard);
+  cardList.addItem(newCard);
   cardPopup.close();
   
 }
@@ -88,4 +88,4 @@ function addNewCard(evt, cardPopupInputsData) {
 userPopupOpenButton.addEventListener("click", prepareUserPopup);
 cardPopupOpenButton.addEventListener("click", prepareCardPopup);
 
-CardList.renderItems();
+cardList.renderItems();
