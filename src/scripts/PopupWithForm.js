@@ -12,8 +12,6 @@ export class PopupWithForm extends Popup {
   }
 
   _getInputValues() {
-    // Учитывая, что здесь я прохожусь по массиву, то реализовать аналогично UserInfo не получилось.
-    // Вынес this._inputs в конструктор. тут только собрал для него данные. Вроде он не должен сохраняться и храниться в памяти.
     this._inputsList.forEach((input) => {
       this._inputs[input.name] = [input.value];
     });
