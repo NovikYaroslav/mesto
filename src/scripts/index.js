@@ -82,7 +82,6 @@ function addNewCard(evt, cardPopupInputsData) {
   const newCard = createCard(cardPopupInputsData);
   cardList.addItem(newCard);
   cardPopup.close();
-  
 }
 
 userPopupOpenButton.addEventListener("click", prepareUserPopup);

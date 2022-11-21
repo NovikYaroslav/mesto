@@ -8,14 +8,14 @@ export class PopupWithForm extends Popup {
     this._inputsList = this._popupFormElement.querySelectorAll(
       ".popup-fieldset__input"
     );
-    this._inputs = {};
   }
 
   _getInputValues() {
+    const inputs = {};
     this._inputsList.forEach((input) => {
-      this._inputs[input.name] = [input.value];
+      inputs[input.name] = [input.value];
     });
-    return this._inputs;
+    return inputs;
   }
 
   setEventListeners() {
