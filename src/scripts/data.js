@@ -1,30 +1,3 @@
-export const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
-
 export const elements = {
   forms: ".popup__form",
   inputs: ".popup-fieldset__input",
@@ -32,3 +5,13 @@ export const elements = {
   submitButtonsInactive: "popup__save_inactive",
   inputsError: "popup-fieldset__input_error",
 };
+
+export const apiconfig = {
+  url: "https://mesto.nomoreparties.co",
+  teamId: "cohort-55",
+  headers: {
+    authorization: "ed59ed17-0f78-41da-b1ed-65a95a483047",
+    "Content-type": 'application/json'
+  }
+
+}

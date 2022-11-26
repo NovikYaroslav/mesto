@@ -1,13 +1,13 @@
-import { initialCards, elements } from "./data.js";
+import { elements, apiconfig } from "./data.js";
 import { FormValidator } from "./FormValidator.js";
 import { Card } from "./Сard.js";
 import { Section } from "./Section.js";
 import { PopupWithImage } from "./PopupWithImage.js";
 import { PopupWithForm } from "./PopupWithForm.js";
-import { PopupForConformation } from "./PopupForConfirmation.js";
+import { PopupForConfirmation } from "./PopupForConfirmation.js";
 import { UserInfo } from "./UserInfo.js";
-
-import "../pages/index.css"; // добавьте импорт главного файла стилей
+import "../pages/index.css";
+import Api from "./API.js";
 
 const userPopupOpenButton = document.querySelector(".profile__edit-button");
 const cardPopupOpenButton = document.querySelector(".profile__add-button");
@@ -27,12 +27,11 @@ cardFormValidator.enableValidation();
 
 const cardList = new Section(
   {
-    items: initialCards,
     renderer: (cardData) => {
       const createdCard = new Card(
         cardData,
-        ".userCardTeamplate",
-        handleCardClick,
+        ".serverCardTeamplate",
+        handleCardClick
       );
       const initialCardElement = createdCard.generateCard();
       cardList.addItem(initialCardElement);
@@ -40,6 +39,17 @@ const cardList = new Section(
   },
   ".elements"
 );
+
+const yandexApi = new Api(apiconfig);
+
+yandexApi
+  .getCards()
+  .then((uploadedCards) => {
+    console.log("загрузился");
+    console.log(uploadedCards);
+    cardList.renderItems(uploadedCards);
+  })
+  .catch((error) => console.log(error));
 
 const cardPopup = new PopupWithForm(".popup_for_card", addNewCard);
 cardPopup.setEventListeners();
@@ -77,9 +87,10 @@ function handleCardClick(link, name) {
 }
 
 function handleCardDeleteClick() {
-  const conformationPopup = new PopupForConformation(".popup_for_conformation");
-  conformationPopup.open();
-  conformationPopup.setEventListeners();
+  console.log(deleteCard);
+  const confirmationPopup = new PopupForConfirmation(".popup_for_conformation");
+  confirmationPopup.open();
+  confirmationPopup.setEventListeners();
 }
 
 function createCard(cardData) {
@@ -103,5 +114,3 @@ function addNewCard(evt, cardPopupInputsData) {
 
 userPopupOpenButton.addEventListener("click", prepareUserPopup);
 cardPopupOpenButton.addEventListener("click", prepareCardPopup);
-
-cardList.renderItems();

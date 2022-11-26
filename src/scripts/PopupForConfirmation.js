@@ -1,7 +1,7 @@
 import { Popup } from "./Popup.js";
-import { Card } from "./Сard.js";
+// import { Card } from "./Сard.js";
 
-export class PopupForConformation extends Popup {
+export class PopupForConfirmation extends Popup {
   constructor(popupSelector, ) {
     super(popupSelector);
     this._confirmButton = this._popup.querySelector(".popup__save");
@@ -10,7 +10,8 @@ export class PopupForConformation extends Popup {
   setEventListeners() {
     super.setEventListeners();
     this._confirmButton.addEventListener("click", () => {
-    Card.deleteCard()});
+    // удаление запросом на сервер
+    });
   }
 
   close() {
