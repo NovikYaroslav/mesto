@@ -1,9 +1,13 @@
+// import { PopupForConformation } from "./PopupForConfirmation";
+
 export class Card {
-  constructor(data, templateSelector, openCard) {
+  constructor(data, templateSelector, openCard, openConformation) {
     this._cardName = data.name;
     this._cardPhoto = data.link;
     this.templateSelector = templateSelector;
     this._openCard = openCard;
+    this._openConformation = openConformation
+    console.log(this._openConformation)
   }
 
   _getTemplate() {
@@ -20,9 +24,13 @@ export class Card {
     this._likeButton.addEventListener("click", () => {
       this._likeCard();
     });
+    // this._deleteButton = this._element.querySelector(".element__delete-button");
+    // this._deleteButton.addEventListener("click", () => {
+    //   this._deleteCard();
+    // });
     this._deleteButton = this._element.querySelector(".element__delete-button");
     this._deleteButton.addEventListener("click", () => {
-      this._deleteCard();
+      this._openConformation();
     });
     this._cardImage = this._element.querySelector(".element__photo");
     this._cardImage.addEventListener("click", () => {

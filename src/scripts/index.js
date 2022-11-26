@@ -4,6 +4,7 @@ import { Card } from "./Сard.js";
 import { Section } from "./Section.js";
 import { PopupWithImage } from "./PopupWithImage.js";
 import { PopupWithForm } from "./PopupWithForm.js";
+import { PopupForConformation } from "./PopupForConfirmation.js";
 import { UserInfo } from "./UserInfo.js";
 
 import "../pages/index.css"; // добавьте импорт главного файла стилей
@@ -28,7 +29,11 @@ const cardList = new Section(
   {
     items: initialCards,
     renderer: (cardData) => {
-      const createdCard = new Card(cardData, ".cardTeamplate", handleCardClick);
+      const createdCard = new Card(
+        cardData,
+        ".userCardTeamplate",
+        handleCardClick,
+      );
       const initialCardElement = createdCard.generateCard();
       cardList.addItem(initialCardElement);
     },
@@ -40,6 +45,7 @@ const cardPopup = new PopupWithForm(".popup_for_card", addNewCard);
 cardPopup.setEventListeners();
 const userPopup = new PopupWithForm(".popup_for_user", savePopup);
 userPopup.setEventListeners();
+
 const userInfo = new UserInfo({
   userNameSelector: ".profile__name",
   userAboutSelector: ".profile__discription",
@@ -70,8 +76,19 @@ function handleCardClick(link, name) {
   imagePopup.setEventListeners();
 }
 
+function handleCardDeleteClick() {
+  const conformationPopup = new PopupForConformation(".popup_for_conformation");
+  conformationPopup.open();
+  conformationPopup.setEventListeners();
+}
+
 function createCard(cardData) {
-  const createdCard = new Card(cardData, ".cardTeamplate", handleCardClick);
+  const createdCard = new Card(
+    cardData,
+    ".userCardTeamplate",
+    handleCardClick,
+    handleCardDeleteClick
+  );
   const createdCardElement = createdCard.generateCard();
   return createdCardElement;
 }

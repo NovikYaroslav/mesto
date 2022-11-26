@@ -130,7 +130,20 @@
         <figcaption class="popup__photo-capture"></figcaption>
       </figure>
     </section>
-    <template class="cardTeamplate">
+
+    <div class="popup popup_for_conformation">
+      <div class="popup__container">
+        <button
+          class="popup__close popup__close_for_card"
+          type="button"
+          aria-label="Кнопка закрытия модального окна"
+        ></button>
+        <h2 class="popup__title popup__title_confirm">Вы уверены?</h2>
+        <button class="popup__save" type="submit">Да</button>
+      </div>
+    </div>
+
+    <template class="userCardTeamplate">
       <div class="element">
         <button
           class="element__delete-button"
@@ -140,11 +153,30 @@
         <img class="element__photo" />
         <div class="element__caption">
           <h2 class="element__text"></h2>
-          <button
-            class="element__like-button"
-            type="button"
-            aria-label="Кнопка лайка карточки"
-          ></button>
+          <div class="element__likes">
+            <button
+              class="element__like-button"
+              type="button"
+              aria-label="Кнопка лайка карточки"
+            ></button>
+            <p class="element__like-counter">1</p>
+          </div>
+        </div>
+      </div>
+    </template>
+    <template class="serverCardTeamplate">
+      <div class="element">
+        <img class="element__photo" />
+        <div class="element__caption">
+          <h2 class="element__text"></h2>
+          <div class="element__likes">
+            <button
+              class="element__like-button"
+              type="button"
+              aria-label="Кнопка лайка карточки"
+            ></button>
+            <p class="element__like-counter">1</p>
+          </div>
         </div>
       </div>
     </template>
