@@ -10,7 +10,6 @@ export class PopupForConfirmation extends Popup {
   setEventListeners() {
     super.setEventListeners();
     this._confirmButton.addEventListener("click", () => {
-    // удаление запросом на сервер
     });
   }
 

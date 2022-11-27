@@ -77,6 +77,7 @@ function prepareCardPopup() {
 function savePopup(evt, profilePopupInputsData) {
   evt.preventDefault();
   userPopup.close();
+  yandexApi.editUserInfo(profilePopupInputsData)
   userInfo.setUserInfo(profilePopupInputsData);
 }
 
@@ -87,7 +88,6 @@ function handleCardClick(link, name) {
 }
 
 function handleCardDeleteClick() {
-  console.log(deleteCard);
   const confirmationPopup = new PopupForConfirmation(".popup_for_conformation");
   confirmationPopup.open();
   confirmationPopup.setEventListeners();
@@ -109,8 +109,26 @@ function addNewCard(evt, cardPopupInputsData) {
   createCard(cardPopupInputsData);
   const newCard = createCard(cardPopupInputsData);
   cardList.addItem(newCard);
+  yandexApi.addCards(cardPopupInputsData)
   cardPopup.close();
 }
 
+// ты добавляешь карточки. cardPopupInputsData почему-то массив. разберись как они создавались раньше.
+
 userPopupOpenButton.addEventListener("click", prepareUserPopup);
 cardPopupOpenButton.addEventListener("click", prepareCardPopup);
+
+yandexApi
+  .getUserInfo()
+  .then((userData) => {
+    // console.log("загрузился профиль");
+    // console.log(userData);
+    userData.userName = userData.name;
+    delete userData.name;
+    userInfo.setUserInfo(userData);
+    // console.log(userData);
+    // выглядит не очень красиво. но хранящееся в массиве сервера "name",мне не подходит, т.к. у имени профиля name="userName".
+    // Это сделано, т.к. автоматические проверки не пропускают 2 идентичных name. У карточек name="name".
+  })
+  .catch((error) => console.log(error));
+
