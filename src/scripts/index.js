@@ -55,6 +55,8 @@ const cardPopup = new PopupWithForm(".popup_for_card", addNewCard);
 cardPopup.setEventListeners();
 const userPopup = new PopupWithForm(".popup_for_user", savePopup);
 userPopup.setEventListeners();
+// const avatarPopup = new PopupWithForm(".popup_for_user", savePopup);
+// avatarPopup.setEventListeners();
 
 const userInfo = new UserInfo({
   userNameSelector: ".profile__name",

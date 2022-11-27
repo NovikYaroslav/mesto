@@ -19,8 +19,17 @@
     </header>
     <main>
       <section class="profile">
-        <img class="profile__avatar" src= "<%=require("./image/avatar.png")%>"
-        alt="Аватар пользователя" />
+        <div class="profile__container">
+          <img class="profile__avatar" src= "https://avatars.githubusercontent.com/u/109671896?v=4"
+          alt="Аватар пользователя" />
+          <!-- <img class="profile__avatar" src= "<%=require("./image/avatar.png")%>"
+          alt="Аватар пользователя" /> -->
+          <button
+          class="profile__avatar-edit-button"
+          type="button"
+          aria-label="Кнопка редатирования аватара"
+        ></button>
+        </div>
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <button
