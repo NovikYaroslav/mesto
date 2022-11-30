@@ -8,6 +8,7 @@ export class PopupWithForm extends Popup {
     this._inputsList = this._popupFormElement.querySelectorAll(
       ".popup-fieldset__input"
     );
+    console.log(this._submitFormCallback)
   }
 
   _getInputValues() {

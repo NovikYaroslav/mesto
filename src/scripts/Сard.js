@@ -1,9 +1,11 @@
-// import { PopupForConformation } from "./PopupForConfirmation";
-
 export class Card {
-  constructor(data, templateSelector, openCard, openConfirmation) {
+  constructor(data, templateSelector, openCard, openConfirmation, ownerId) {
     this._cardName = data.name;
     this._cardPhoto = data.link;
+    this._cardLikes = data.likes;
+    this._cardId = data._id;
+    this._cardOwnerId = data.owner._id;
+    this._pageOwnerId = ownerId
     this.templateSelector = templateSelector;
     this._openCard = openCard;
     this._openConfirmation = openConfirmation;
@@ -14,7 +16,6 @@ export class Card {
       .querySelector(this.templateSelector)
       .content.querySelector(".element")
       .cloneNode(true);
-
     return cardElement;
   }
 
@@ -30,7 +31,7 @@ export class Card {
     this._deleteButton = this._element.querySelector(".element__delete-button");
     if (this._deleteButton) {
       this._deleteButton.addEventListener("click", () => {
-        this._openConfirmation();
+        this._openConfirmation(this._element, this._cardId, this._deleteCard);
       });
     }
     this._cardImage = this._element.querySelector(".element__photo");
@@ -43,9 +44,14 @@ export class Card {
     this._likeButton.classList.toggle("element__like-button_active");
   }
 
-  _deleteCard() {
-    this._element.remove();
-    this._element = null;
+  // _deleteCard() {
+  //   this._element.remove();
+  //   this._element = null;
+  // }
+
+  _deleteCard(card) {
+    card.remove();
+    card = null;
   }
 
   generateCard() {
@@ -54,6 +60,14 @@ export class Card {
     this._cardImage.src = this._cardPhoto;
     this._cardImage.alt = this._cardName;
     this._element.querySelector(".element__text").textContent = this._cardName;
+    if (this._cardOwnerId !== this._pageOwnerId) {
+      this._deleteButton.remove();
+    }
+    // this._likeCounter = this._element.querySelector(".element__like-counter")
+    // this._likeCounter.textContent = this._cardLikes.length
+    // if (this._cardLikes.length <= 0) {
+    //   this._likeCounter.textContent = ""
+    // }
 
     return this._element;
   }

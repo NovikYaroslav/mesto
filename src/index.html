@@ -20,24 +20,27 @@
     <main>
       <section class="profile">
         <div class="profile__container">
-          <img class="profile__avatar" src= "https://avatars.githubusercontent.com/u/109671896?v=4"
-          alt="Аватар пользователя" />
+          <img
+            class="profile__avatar"
+            src="https://avatars.githubusercontent.com/u/109671896?v=4"
+            alt="Аватар пользователя"
+          />
           <!-- <img class="profile__avatar" src= "<%=require("./image/avatar.png")%>"
           alt="Аватар пользователя" /> -->
           <button
-          class="profile__avatar-edit-button"
-          type="button"
-          aria-label="Кнопка редатирования аватара"
-        ></button>
+            class="profile__avatar-edit-button"
+            type="button"
+            aria-label="Кнопка редатирования аватара"
+          ></button>
         </div>
         <div class="profile__info">
-          <h1 class="profile__name">Жак-Ив Кусто</h1>
+          <h1 class="profile__name"></h1>
           <button
             class="profile__edit-button"
             type="button"
             aria-label="Кнопка настройки профиля"
           ></button>
-          <h2 class="profile__discription">Исследователь океана</h2>
+          <h2 class="profile__discription"></h2>
         </div>
         <button
           class="profile__add-button"
@@ -124,6 +127,62 @@
         </form>
       </div>
     </div>
+
+    <div class="popup popup_for_avatar">
+      <div class="popup__container">
+        <button
+          class="popup__close popup__close_for_avatar"
+          type="button"
+          aria-label="Кнопка закрытия модального окна"
+        ></button>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form class="popup__form" name="user-avatar" novalidate>
+          <fieldset class="popup-fieldset">
+            <input
+              class="popup-fieldset__input popup-fieldset__input_value_avatar"
+              required
+              type="url"
+              name="link"
+              placeholder="Ссылка на аватар"
+              value=""
+            />
+            <span class="popup__error" id="link-error"></span>
+          </fieldset>
+          <button class="popup__save" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup popup_for_conformation">
+      <div class="popup__container">
+        <button
+          class="popup__close popup__close_for_conformation"
+          type="button"
+          aria-label="Кнопка закрытия модального окна"
+        ></button>
+        <h2 class="popup__title popup__title_confirm">Вы уверены?</h2>
+        <button class="popup__save" type="submit">Да</button>
+      </div>
+    </div>
+
+    <!-- <div class="popup popup_for_conformation">
+      <div class="popup__container">
+        <button
+          class="popup__close popup__close_for_card"
+          type="button"
+          aria-label="Кнопка закрытия модального окна"
+        ></button>
+        <h2 class="popup__title">Вы уверены?</h2>
+        <form
+          class="popup__form popup__title_confirm"
+          name="delete-conformation"
+          novalidate
+        >
+          <button class="popup__save" type="submit">Да</button>
+        </form>
+      </div> 
+    </div> -->
+
     <section class="popup popup_for_photo">
       <figure class="popup__photo-container">
         <button
@@ -139,18 +198,6 @@
         <figcaption class="popup__photo-capture"></figcaption>
       </figure>
     </section>
-
-    <div class="popup popup_for_conformation">
-      <div class="popup__container">
-        <button
-          class="popup__close popup__close_for_card"
-          type="button"
-          aria-label="Кнопка закрытия модального окна"
-        ></button>
-        <h2 class="popup__title popup__title_confirm">Вы уверены?</h2>
-        <button class="popup__save" type="submit">Да</button>
-      </div>
-    </div>
 
     <template class="userCardTeamplate">
       <div class="element">
@@ -168,23 +215,7 @@
               type="button"
               aria-label="Кнопка лайка карточки"
             ></button>
-            <p class="element__like-counter">1</p>
-          </div>
-        </div>
-      </div>
-    </template>
-    <template class="serverCardTeamplate">
-      <div class="element">
-        <img class="element__photo" />
-        <div class="element__caption">
-          <h2 class="element__text"></h2>
-          <div class="element__likes">
-            <button
-              class="element__like-button"
-              type="button"
-              aria-label="Кнопка лайка карточки"
-            ></button>
-            <p class="element__like-counter">1</p>
+            <p class="element__like-counter"></p>
           </div>
         </div>
       </div>

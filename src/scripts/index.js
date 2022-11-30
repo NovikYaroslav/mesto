@@ -11,27 +11,55 @@ import Api from "./API.js";
 
 const userPopupOpenButton = document.querySelector(".profile__edit-button");
 const cardPopupOpenButton = document.querySelector(".profile__add-button");
+const avatarPopupOpenButton = document.querySelector(
+  ".profile__avatar-edit-button"
+);
 const profileFormElement = document.querySelector('[name="user-profile"]');
 const cardFormElement = document.querySelector('[name="user-card"]');
+const avatarFormElement = document.querySelector('[name="user-avatar"]');
 const nameInput = profileFormElement.querySelector(
   ".popup-fieldset__input_value_name"
 );
 const aboutInput = profileFormElement.querySelector(
   ".popup-fieldset__input_value_about"
 );
+let ownerId = "тут должен быть id владельца";
 
 const profileFormValidator = new FormValidator(elements, profileFormElement);
 profileFormValidator.enableValidation();
 const cardFormValidator = new FormValidator(elements, cardFormElement);
 cardFormValidator.enableValidation();
+const avatarFormValidator = new FormValidator(elements, avatarFormElement);
+avatarFormValidator.enableValidation();
+
+const yandexApi = new Api(apiconfig);
+
+const cardPopup = new PopupWithForm(".popup_for_card", addNewCard);
+cardPopup.setEventListeners();
+const userPopup = new PopupWithForm(".popup_for_user", saveUserPopup);
+userPopup.setEventListeners();
+const avatarPopup = new PopupWithForm(".popup_for_avatar", saveAvatarPopup);
+avatarPopup.setEventListeners();
+const confirmationPopup = new PopupForConfirmation(
+  ".popup_for_conformation",
+  handleCardDeleteConfirm
+);
+
+const userInfo = new UserInfo({
+  userNameSelector: ".profile__name",
+  userAboutSelector: ".profile__discription",
+  userAvatarSelector: ".profile__avatar",
+});
 
 const cardList = new Section(
   {
     renderer: (cardData) => {
       const createdCard = new Card(
         cardData,
-        ".serverCardTeamplate",
-        handleCardClick
+        ".userCardTeamplate",
+        handleCardClick,
+        handleCardDeleteClick,
+        ownerId
       );
       const initialCardElement = createdCard.generateCard();
       cardList.addItem(initialCardElement);
@@ -40,28 +68,22 @@ const cardList = new Section(
   ".elements"
 );
 
-const yandexApi = new Api(apiconfig);
+yandexApi
+  .getUserInfoFromServer()
+  .then((userData) => {
+    userData.userName = userData.name;
+    delete userData.name;
+    userInfo.setUserInfo(userData);
+    ownerId = userData._id;
+  })
+  .catch((error) => alert(`"Данные пользователя не загружены." ${error}`));
 
 yandexApi
   .getCards()
   .then((uploadedCards) => {
-    console.log("загрузился");
-    console.log(uploadedCards);
     cardList.renderItems(uploadedCards);
   })
   .catch((error) => console.log(error));
-
-const cardPopup = new PopupWithForm(".popup_for_card", addNewCard);
-cardPopup.setEventListeners();
-const userPopup = new PopupWithForm(".popup_for_user", savePopup);
-userPopup.setEventListeners();
-// const avatarPopup = new PopupWithForm(".popup_for_user", savePopup);
-// avatarPopup.setEventListeners();
-
-const userInfo = new UserInfo({
-  userNameSelector: ".profile__name",
-  userAboutSelector: ".profile__discription",
-});
 
 function prepareUserPopup() {
   userPopup.open();
@@ -76,11 +98,23 @@ function prepareCardPopup() {
   cardFormValidator.resetValidation();
 }
 
-function savePopup(evt, profilePopupInputsData) {
+function prepareAvatarPopup() {
+  avatarPopup.open();
+  avatarFormValidator.resetValidation();
+}
+
+function saveUserPopup(evt, profilePopupInputsData) {
   evt.preventDefault();
-  userPopup.close();
-  yandexApi.editUserInfo(profilePopupInputsData)
+  yandexApi.editUserInfo(profilePopupInputsData);
   userInfo.setUserInfo(profilePopupInputsData);
+  userPopup.close();
+}
+
+function saveAvatarPopup(evt, avatarPopupInputsData) {
+  evt.preventDefault();
+  yandexApi.editUserAvatar(avatarPopupInputsData);
+  userInfo.setUserAvatar(avatarPopupInputsData);
+  avatarPopup.close();
 }
 
 function handleCardClick(link, name) {
@@ -89,10 +123,16 @@ function handleCardClick(link, name) {
   imagePopup.setEventListeners();
 }
 
-function handleCardDeleteClick() {
-  const confirmationPopup = new PopupForConfirmation(".popup_for_conformation");
+function handleCardDeleteClick(card, cardId, deleteCard) {
   confirmationPopup.open();
-  confirmationPopup.setEventListeners();
+  confirmationPopup.setEventListeners(card, cardId, deleteCard);
+}
+
+function handleCardDeleteConfirm(evt, card, cardId, deleteCard) {
+  evt.preventDefault();
+  deleteCard(card);
+  yandexApi.deleteCard(cardId);
+  confirmationPopup.close();
 }
 
 function createCard(cardData) {
@@ -100,7 +140,8 @@ function createCard(cardData) {
     cardData,
     ".userCardTeamplate",
     handleCardClick,
-    handleCardDeleteClick
+    handleCardDeleteClick,
+    ownerId
   );
   const createdCardElement = createdCard.generateCard();
   return createdCardElement;
@@ -108,29 +149,19 @@ function createCard(cardData) {
 
 function addNewCard(evt, cardPopupInputsData) {
   evt.preventDefault();
-  createCard(cardPopupInputsData);
-  const newCard = createCard(cardPopupInputsData);
-  cardList.addItem(newCard);
-  yandexApi.addCards(cardPopupInputsData)
+  yandexApi
+    .addCards(cardPopupInputsData)
+    .then((newCardData) => {
+      console.log(newCardData);
+      createCard(newCardData);
+      const newCard = createCard(newCardData);
+      cardList.addItem(newCard);
+    })
+    .catch((error) => alert(`Данные пользователя не загружены ${error}`));
+
   cardPopup.close();
 }
 
-// ты добавляешь карточки. cardPopupInputsData почему-то массив. разберись как они создавались раньше.
-
 userPopupOpenButton.addEventListener("click", prepareUserPopup);
 cardPopupOpenButton.addEventListener("click", prepareCardPopup);
-
-yandexApi
-  .getUserInfo()
-  .then((userData) => {
-    // console.log("загрузился профиль");
-    // console.log(userData);
-    userData.userName = userData.name;
-    delete userData.name;
-    userInfo.setUserInfo(userData);
-    // console.log(userData);
-    // выглядит не очень красиво. но хранящееся в массиве сервера "name",мне не подходит, т.к. у имени профиля name="userName".
-    // Это сделано, т.к. автоматические проверки не пропускают 2 идентичных name. У карточек name="name".
-  })
-  .catch((error) => console.log(error));
-
+avatarPopupOpenButton.addEventListener("click", prepareAvatarPopup);

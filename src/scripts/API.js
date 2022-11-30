@@ -13,7 +13,7 @@ export default class Api {
       if (response.ok) {
         return response.json();
       } else {
-        Promise.reject(`Ошибка: ${response.status} ${response.statusText}`);
+       return Promise.reject(`Ошибка: ${response.status} ${response.statusText}`);
       }
     });
   }
@@ -27,14 +27,14 @@ export default class Api {
       }),
     }).then((response) => {
       if (response.ok) {
-        response.json();
+        return response.json();
       } else {
-        Promise.reject(`Ошибка: ${response.status} ${response.statusText}`);
+      return  Promise.reject(`Ошибка: ${response.status} ${response.statusText}`);
       }
     });
   }
 
-  getUserInfo() {
+  getUserInfoFromServer() {
     return fetch(`${this._url}/v1/${this._teamId}/users/me`, {
       headers: this._headers,
       method: "GET",
@@ -42,13 +42,12 @@ export default class Api {
       if (response.ok) {
         return response.json();
       } else {
-        Promise.reject(`Ошибка: ${response.status} ${response.statusText}`);
+      return  Promise.reject(`Ошибка: ${response.status} ${response.statusText}`);
       }
     });
   }
 
   editUserInfo(profileData) {
-    console.log(profileData)
     fetch(`${this._url}/v1/${this._teamId}/users/me`, {
       method: "PATCH",
       headers: this._headers,
@@ -59,11 +58,21 @@ export default class Api {
     });
   }
 
+  editUserAvatar(avatar) {
+    fetch(`${this._url}/v1/${this._teamId}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: `${avatar.link}`,
+      }),
+    });
+  }
+
   likeCard() {}
 
-  deleteCard() {
+  deleteCard(cardId) {
     return fetch(
-      `${this._url}/v1/${this._teamId}/cards/638384ccb1cbff185a85408f`,
+      `${this._url}/v1/${this._teamId}/cards/${cardId}`,
       {
         headers: this._headers,
         method: "DELETE",
@@ -72,7 +81,7 @@ export default class Api {
       if (response.ok) {
         return response.json();
       } else {
-        Promise.reject(`Ошибка: ${response.status} ${response.statusText}`);
+       return Promise.reject(`Ошибка: ${response.status} ${response.statusText}`);
       }
     });
   }
