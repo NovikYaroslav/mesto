@@ -13,7 +13,9 @@ export default class Api {
       if (response.ok) {
         return response.json();
       } else {
-       return Promise.reject(`Ошибка: ${response.status} ${response.statusText}`);
+        return Promise.reject(
+          `Ошибка: ${response.status} ${response.statusText}`
+        );
       }
     });
   }
@@ -29,7 +31,9 @@ export default class Api {
       if (response.ok) {
         return response.json();
       } else {
-      return  Promise.reject(`Ошибка: ${response.status} ${response.statusText}`);
+        return Promise.reject(
+          `Ошибка: ${response.status} ${response.statusText}`
+        );
       }
     });
   }
@@ -42,7 +46,9 @@ export default class Api {
       if (response.ok) {
         return response.json();
       } else {
-      return  Promise.reject(`Ошибка: ${response.status} ${response.statusText}`);
+        return Promise.reject(
+          `Ошибка: ${response.status} ${response.statusText}`
+        );
       }
     });
   }
@@ -68,20 +74,47 @@ export default class Api {
     });
   }
 
-  likeCard() {}
-
-  deleteCard(cardId) {
-    return fetch(
-      `${this._url}/v1/${this._teamId}/cards/${cardId}`,
-      {
-        headers: this._headers,
-        method: "DELETE",
-      }
-    ).then((response) => {
+  setCardLike(cardId) {
+  return fetch(`${this._url}/v1/${this._teamId}/cards/${cardId}/likes`, {
+      method: "PUT",
+      headers: this._headers,
+    }).then((response) => {
       if (response.ok) {
         return response.json();
       } else {
-       return Promise.reject(`Ошибка: ${response.status} ${response.statusText}`);
+        return Promise.reject(
+          `Ошибка: ${response.status} ${response.statusText}`
+        );
+      }
+    });
+  }
+
+  deleteCardLike(cardId) {
+   return fetch(`${this._url}/v1/${this._teamId}/cards/${cardId}/likes`, {
+      headers: this._headers,
+      method: "DELETE",
+    }).then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        return Promise.reject(
+          `Ошибка: ${response.status} ${response.statusText}`
+        );
+      }
+    });
+  }
+
+  deleteCard(cardId) {
+    return fetch(`${this._url}/v1/${this._teamId}/cards/${cardId}`, {
+      headers: this._headers,
+      method: "DELETE",
+    }).then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        return Promise.reject(
+          `Ошибка: ${response.status} ${response.statusText}`
+        );
       }
     });
   }

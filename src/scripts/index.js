@@ -8,6 +8,7 @@ import { PopupForConfirmation } from "./PopupForConfirmation.js";
 import { UserInfo } from "./UserInfo.js";
 import "../pages/index.css";
 import Api from "./API.js";
+import { data } from "autoprefixer";
 
 const userPopupOpenButton = document.querySelector(".profile__edit-button");
 const cardPopupOpenButton = document.querySelector(".profile__add-button");
@@ -23,7 +24,7 @@ const nameInput = profileFormElement.querySelector(
 const aboutInput = profileFormElement.querySelector(
   ".popup-fieldset__input_value_about"
 );
-let ownerId = "тут должен быть id владельца";
+let ownerId = "id владельца страницы";
 
 const profileFormValidator = new FormValidator(elements, profileFormElement);
 profileFormValidator.enableValidation();
@@ -51,23 +52,6 @@ const userInfo = new UserInfo({
   userAvatarSelector: ".profile__avatar",
 });
 
-const cardList = new Section(
-  {
-    renderer: (cardData) => {
-      const createdCard = new Card(
-        cardData,
-        ".userCardTeamplate",
-        handleCardClick,
-        handleCardDeleteClick,
-        ownerId
-      );
-      const initialCardElement = createdCard.generateCard();
-      cardList.addItem(initialCardElement);
-    },
-  },
-  ".elements"
-);
-
 yandexApi
   .getUserInfoFromServer()
   .then((userData) => {
@@ -77,6 +61,25 @@ yandexApi
     ownerId = userData._id;
   })
   .catch((error) => alert(`"Данные пользователя не загружены." ${error}`));
+
+const cardList = new Section(
+  {
+    renderer: (cardData) => {
+      const createdCard = new Card(
+        cardData,
+        ".userCardTeamplate",
+        handleCardClick,
+        handleCardDeleteClick,
+        handleCardLikeClick,
+        handleCardLikeDelete,
+        ownerId
+      );
+      const initialCardElement = createdCard.generateCard();
+      cardList.addItem(initialCardElement);
+    },
+  },
+  ".elements"
+);
 
 yandexApi
   .getCards()
@@ -105,14 +108,22 @@ function prepareAvatarPopup() {
 
 function saveUserPopup(evt, profilePopupInputsData) {
   evt.preventDefault();
-  yandexApi.editUserInfo(profilePopupInputsData);
+  userPopup.renderLoading(true);
+  yandexApi
+    .editUserInfo(profilePopupInputsData)
+    .then()
+    .catch((error) => console.log(error))
+    .finally(() => userPopup.renderLoading(false));
   userInfo.setUserInfo(profilePopupInputsData);
   userPopup.close();
 }
 
 function saveAvatarPopup(evt, avatarPopupInputsData) {
   evt.preventDefault();
-  yandexApi.editUserAvatar(avatarPopupInputsData);
+  avatarPopup.renderLoading(true);
+  yandexApi
+    .editUserAvatar(avatarPopupInputsData)
+    .finally(() => avatarPopup.renderLoading(false));
   userInfo.setUserAvatar(avatarPopupInputsData);
   avatarPopup.close();
 }
@@ -135,12 +146,32 @@ function handleCardDeleteConfirm(evt, card, cardId, deleteCard) {
   confirmationPopup.close();
 }
 
+function handleCardLikeClick(id, likeCounter) {
+  yandexApi
+    .setCardLike(id)
+    .then((cardData) => {
+      likeCounter.textContent = cardData.likes.length;
+    })
+    .catch((error) => console.log(error));
+}
+
+function handleCardLikeDelete(id, likeCounter) {
+  yandexApi
+    .deleteCardLike(id)
+    .then((cardData) => {
+      likeCounter.textContent = cardData.likes.length;
+    })
+    .catch((error) => console.log(error));
+}
+
 function createCard(cardData) {
   const createdCard = new Card(
     cardData,
     ".userCardTeamplate",
     handleCardClick,
     handleCardDeleteClick,
+    handleCardLikeClick,
+    handleCardLikeDelete,
     ownerId
   );
   const createdCardElement = createdCard.generateCard();
@@ -149,16 +180,16 @@ function createCard(cardData) {
 
 function addNewCard(evt, cardPopupInputsData) {
   evt.preventDefault();
+  cardPopup.renderLoading(false);
   yandexApi
     .addCards(cardPopupInputsData)
     .then((newCardData) => {
       console.log(newCardData);
-      createCard(newCardData);
       const newCard = createCard(newCardData);
       cardList.addItem(newCard);
     })
-    .catch((error) => alert(`Данные пользователя не загружены ${error}`));
-
+    .catch((error) => alert(`Данные пользователя не загружены ${error}`))
+    .finally(() => cardPopup.renderLoading(true));
   cardPopup.close();
 }
 

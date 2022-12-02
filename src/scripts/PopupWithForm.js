@@ -8,7 +8,8 @@ export class PopupWithForm extends Popup {
     this._inputsList = this._popupFormElement.querySelectorAll(
       ".popup-fieldset__input"
     );
-    console.log(this._submitFormCallback)
+    this._submitButton = this._popupFormElement.querySelector(".popup__save")
+    console.log(this._submitButton)
   }
 
   _getInputValues() {
@@ -25,6 +26,19 @@ export class PopupWithForm extends Popup {
       this._submitFormCallback(evt, this._getInputValues());
     });
   }
+
+  renderLoading(isLoading) {
+    if (isLoading) {
+      this._submitButton.textContent = this._submitButton.textContent
+      console.log("Загрузил!")
+      console.log(this._submitButton.textContent)
+    }
+    else {
+      this._submitButton.textContent = "Сохранение..."
+      console.log("Гружу")
+    }
+  }
+  // Ты остановился здесь. У тебя не востанавливается значение кнопки.
 
   close() {
     super.close();
