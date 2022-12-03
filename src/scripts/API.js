@@ -54,7 +54,7 @@ export default class Api {
   }
 
   editUserInfo(profileData) {
-    fetch(`${this._url}/v1/${this._teamId}/users/me`, {
+    return fetch(`${this._url}/v1/${this._teamId}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
@@ -65,7 +65,7 @@ export default class Api {
   }
 
   editUserAvatar(avatar) {
-    fetch(`${this._url}/v1/${this._teamId}/users/me/avatar`, {
+    return fetch(`${this._url}/v1/${this._teamId}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
@@ -75,7 +75,7 @@ export default class Api {
   }
 
   setCardLike(cardId) {
-  return fetch(`${this._url}/v1/${this._teamId}/cards/${cardId}/likes`, {
+    return fetch(`${this._url}/v1/${this._teamId}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this._headers,
     }).then((response) => {
@@ -90,7 +90,7 @@ export default class Api {
   }
 
   deleteCardLike(cardId) {
-   return fetch(`${this._url}/v1/${this._teamId}/cards/${cardId}/likes`, {
+    return fetch(`${this._url}/v1/${this._teamId}/cards/${cardId}/likes`, {
       headers: this._headers,
       method: "DELETE",
     }).then((response) => {

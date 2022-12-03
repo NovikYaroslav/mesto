@@ -8,8 +8,7 @@ export class PopupWithForm extends Popup {
     this._inputsList = this._popupFormElement.querySelectorAll(
       ".popup-fieldset__input"
     );
-    this._submitButton = this._popupFormElement.querySelector(".popup__save")
-    console.log(this._submitButton)
+    this._submitButton = this._popupFormElement.querySelector(".popup__save");
   }
 
   _getInputValues() {
@@ -27,18 +26,13 @@ export class PopupWithForm extends Popup {
     });
   }
 
-  renderLoading(isLoading) {
+  renderLoading(isLoading, message) {
     if (isLoading) {
-      this._submitButton.textContent = this._submitButton.textContent
-      console.log("Загрузил!")
-      console.log(this._submitButton.textContent)
-    }
-    else {
-      this._submitButton.textContent = "Сохранение..."
-      console.log("Гружу")
+      this._submitButton.textContent = message;
+    } else {
+      this._submitButton.textContent = message;
     }
   }
-  // Ты остановился здесь. У тебя не востанавливается значение кнопки.
 
   close() {
     super.close();

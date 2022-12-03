@@ -8,7 +8,6 @@ import { PopupForConfirmation } from "./PopupForConfirmation.js";
 import { UserInfo } from "./UserInfo.js";
 import "../pages/index.css";
 import Api from "./API.js";
-import { data } from "autoprefixer";
 
 const userPopupOpenButton = document.querySelector(".profile__edit-button");
 const cardPopupOpenButton = document.querySelector(".profile__add-button");
@@ -26,15 +25,6 @@ const aboutInput = profileFormElement.querySelector(
 );
 let ownerId = "id владельца страницы";
 
-const profileFormValidator = new FormValidator(elements, profileFormElement);
-profileFormValidator.enableValidation();
-const cardFormValidator = new FormValidator(elements, cardFormElement);
-cardFormValidator.enableValidation();
-const avatarFormValidator = new FormValidator(elements, avatarFormElement);
-avatarFormValidator.enableValidation();
-
-const yandexApi = new Api(apiconfig);
-
 const cardPopup = new PopupWithForm(".popup_for_card", addNewCard);
 cardPopup.setEventListeners();
 const userPopup = new PopupWithForm(".popup_for_user", saveUserPopup);
@@ -46,21 +36,20 @@ const confirmationPopup = new PopupForConfirmation(
   handleCardDeleteConfirm
 );
 
+const profileFormValidator = new FormValidator(elements, profileFormElement);
+profileFormValidator.enableValidation();
+const cardFormValidator = new FormValidator(elements, cardFormElement);
+cardFormValidator.enableValidation();
+const avatarFormValidator = new FormValidator(elements, avatarFormElement);
+avatarFormValidator.enableValidation();
+
+const yandexApi = new Api(apiconfig);
+
 const userInfo = new UserInfo({
   userNameSelector: ".profile__name",
   userAboutSelector: ".profile__discription",
   userAvatarSelector: ".profile__avatar",
 });
-
-yandexApi
-  .getUserInfoFromServer()
-  .then((userData) => {
-    userData.userName = userData.name;
-    delete userData.name;
-    userInfo.setUserInfo(userData);
-    ownerId = userData._id;
-  })
-  .catch((error) => alert(`"Данные пользователя не загружены." ${error}`));
 
 const cardList = new Section(
   {
@@ -80,6 +69,16 @@ const cardList = new Section(
   },
   ".elements"
 );
+
+yandexApi
+  .getUserInfoFromServer()
+  .then((userData) => {
+    userData.userName = userData.name;
+    delete userData.name;
+    userInfo.setUserInfo(userData);
+    ownerId = userData._id;
+  })
+  .catch((error) => console.log(error));
 
 yandexApi
   .getCards()
@@ -108,22 +107,30 @@ function prepareAvatarPopup() {
 
 function saveUserPopup(evt, profilePopupInputsData) {
   evt.preventDefault();
-  userPopup.renderLoading(true);
+  let message = "Сохранение...";
+  userPopup.renderLoading(true, message);
   yandexApi
     .editUserInfo(profilePopupInputsData)
-    .then()
     .catch((error) => console.log(error))
-    .finally(() => userPopup.renderLoading(false));
+    .finally(() => {
+      let message = "Сохранить";
+      userPopup.renderLoading(false, message);
+    });
   userInfo.setUserInfo(profilePopupInputsData);
   userPopup.close();
 }
 
 function saveAvatarPopup(evt, avatarPopupInputsData) {
   evt.preventDefault();
-  avatarPopup.renderLoading(true);
+  let message = "Сохранение...";
+  avatarPopup.renderLoading(true, message);
   yandexApi
     .editUserAvatar(avatarPopupInputsData)
-    .finally(() => avatarPopup.renderLoading(false));
+    .catch((error) => console.log(error))
+    .finally(() => {
+      let message = "Сохранить";
+      avatarPopup.renderLoading(false, message);
+    });
   userInfo.setUserAvatar(avatarPopupInputsData);
   avatarPopup.close();
 }
@@ -160,6 +167,9 @@ function handleCardLikeDelete(id, likeCounter) {
     .deleteCardLike(id)
     .then((cardData) => {
       likeCounter.textContent = cardData.likes.length;
+      if (cardData.likes.length <= 0) {
+        likeCounter.textContent = "";
+      }
     })
     .catch((error) => console.log(error));
 }
@@ -180,7 +190,8 @@ function createCard(cardData) {
 
 function addNewCard(evt, cardPopupInputsData) {
   evt.preventDefault();
-  cardPopup.renderLoading(false);
+  let message = "Создаю...";
+  cardPopup.renderLoading(true, message);
   yandexApi
     .addCards(cardPopupInputsData)
     .then((newCardData) => {
@@ -189,7 +200,10 @@ function addNewCard(evt, cardPopupInputsData) {
       cardList.addItem(newCard);
     })
     .catch((error) => alert(`Данные пользователя не загружены ${error}`))
-    .finally(() => cardPopup.renderLoading(true));
+    .finally(() => {
+      let message = "Создать";
+      cardPopup.renderLoading(false, message);
+    });
   cardPopup.close();
 }
 

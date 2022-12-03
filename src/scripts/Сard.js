@@ -22,8 +22,6 @@ export class Card {
     this._isLiked = this._cardLikes.some(
       (item) => item._id === this._pageOwnerId
     );
-
-    // console.log(this._pageOwnerId)
   }
 
   _getTemplate() {
@@ -37,8 +35,8 @@ export class Card {
   _setEventListeners() {
     this._likeButton = this._element.querySelector(".element__like-button");
     this._likeButton.addEventListener("click", () => {
-      this._toggleCardLikes()
-      this._isLiked = !this._isLiked
+      this._toggleCardLikes();
+      this._isLiked = !this._isLiked;
     });
     this._deleteButton = this._element.querySelector(".element__delete-button");
     if (this._deleteButton) {
@@ -52,46 +50,14 @@ export class Card {
     });
   }
 
-  // _renderCardLikes() {
-  //   if (this._isLiked()) {
-  //     this._deleteLike(this._cardId, this._likeCounter);
-  //     this._likeButton.classList.add("element__like-button_active");
-  //   }
-  //   else {
-  //     this._likeCounter = this._element.querySelector(".element__like-counter");
-  //   this._setLike(this._cardId, this._likeCounter);
-  //   this._likeButton.classList.remove("element__like-button_active");
-  //   }
-  // }
-
-  // changeLikeStatus() {
-  //   if (this.isLiked()) {
-  //     this._deleteLike(this._cardId, this._likeCounter);
-  //   }
-  //   else {
-  //         this._setLike(this._cardId, this._likeCounter);
-
-  //   }}
-  // }
-
-  // Проверяет наличие моего id в массиве лайков карточки.
-  // _isLiked() {
-  //   const isLiked = this._cardLikes.some(
-  //     (item) => item._id === this._pageOwnerId
-  //     // проверяет в массиве карточки, которая пришла с сервера при загрузке страницы.
-  //   );
-  //   return isLiked;
-  // }
-
-
-
-
-
   // Проверяет наличие моего id в массиве лайков карточки.
   // Если в масси есть мой Id )т.е. я ставил лайк.
   // То функция закрашивает сердечко, при загрузке с сервера.
   _renderCardLikes() {
     this._likeCounter.textContent = this._cardLikes.length;
+    if (this._cardLikes.length <= 0) {
+      this._likeCounter.textContent = "";
+    }
     if (this._isLiked) {
       this._likeButton.classList.add("element__like-button_active");
     }
@@ -111,8 +77,6 @@ export class Card {
   // Если мой id есть в массиве, удали лайк.
   // Если моего id нет, добавить лайк.
   _toggleCardLikes() {
-    
-
     if (this._isLiked) {
       this._deleteLikeCard();
     } else {
