@@ -1,13 +1,13 @@
 import { elements, apiconfig } from "./data.js";
-import { FormValidator } from "./FormValidator.js";
-import { Card } from "./Сard.js";
-import { Section } from "./Section.js";
-import { PopupWithImage } from "./PopupWithImage.js";
-import { PopupWithForm } from "./PopupWithForm.js";
+import { FormValidator } from "../components/FormValidator.js";
+import { Card } from "../components/Сard.js";
+import { Section } from "../components/Section.js";
+import { PopupWithImage } from "../components/PopupWithImage.js";
+import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupForConfirmation } from "./PopupForConfirmation.js";
-import { UserInfo } from "./UserInfo.js";
+import { UserInfo } from "../components/UserInfo.js";
+import { Api } from "../components/API.js";
 import "../pages/index.css";
-import Api from "./API.js";
 
 const userPopupOpenButton = document.querySelector(".profile__edit-button");
 const cardPopupOpenButton = document.querySelector(".profile__add-button");
