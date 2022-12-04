@@ -50,9 +50,6 @@ export class Card {
     });
   }
 
-  // Проверяет наличие моего id в массиве лайков карточки.
-  // Если в масси есть мой Id )т.е. я ставил лайк.
-  // То функция закрашивает сердечко, при загрузке с сервера.
   _renderCardLikes() {
     this._likeCounter.textContent = this._cardLikes.length;
     if (this._cardLikes.length <= 0) {
@@ -62,20 +59,17 @@ export class Card {
       this._likeButton.classList.add("element__like-button_active");
     }
   }
-  // Ставит лайк. Отправляет PUT запрос на сервер. Окрашивает сердечко.
+
   _likeCard() {
     this._setLike(this._cardId, this._likeCounter, this._cardLikes);
     this._likeButton.classList.add("element__like-button_active");
   }
-  // Убирает лайк. Отправляет DELETE запрос на сервер. Обесцвечивает сердечко.
+
   _deleteLikeCard() {
     this._deleteLike(this._cardId, this._likeCounter, this._cardLikes);
     this._likeButton.classList.remove("element__like-button_active");
   }
 
-  //Функция которая должна висеть на кнопке.
-  // Если мой id есть в массиве, удали лайк.
-  // Если моего id нет, добавить лайк.
   _toggleCardLikes() {
     if (this._isLiked) {
       this._deleteLikeCard();
@@ -93,7 +87,6 @@ export class Card {
     this._element = this._getTemplate();
     this._likeCounter = this._element.querySelector(".element__like-counter");
     this._setEventListeners();
-    // тут нужно вызывать функцию, которая будет закрашивать сердечко и выводить длинну массива. При загрузке сервера.
     this._renderCardLikes();
     this._cardImage.src = this._cardPhoto;
     this._cardImage.alt = this._cardName;

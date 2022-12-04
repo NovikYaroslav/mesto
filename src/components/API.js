@@ -1,8 +1,18 @@
-export default class Api {
+export class Api {
   constructor({ url, teamId, headers }) {
     this._url = url;
     this._headers = headers;
     this._teamId = teamId;
+  }
+
+  _checkServerResponse(response) {
+    if (response.ok) {
+      return response.json();
+    } else {
+      return Promise.reject(
+        `Ошибка: ${response.status} ${response.statusText}`
+      );
+    }
   }
 
   getCards() {
@@ -10,13 +20,7 @@ export default class Api {
       headers: this._headers,
       method: "GET",
     }).then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        return Promise.reject(
-          `Ошибка: ${response.status} ${response.statusText}`
-        );
-      }
+      return this._checkServerResponse(response);
     });
   }
   addCards(newCardData) {
@@ -28,13 +32,7 @@ export default class Api {
         link: `${newCardData.link}`,
       }),
     }).then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        return Promise.reject(
-          `Ошибка: ${response.status} ${response.statusText}`
-        );
-      }
+      return this._checkServerResponse(response);
     });
   }
 
@@ -43,13 +41,7 @@ export default class Api {
       headers: this._headers,
       method: "GET",
     }).then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        return Promise.reject(
-          `Ошибка: ${response.status} ${response.statusText}`
-        );
-      }
+      return this._checkServerResponse(response);
     });
   }
 
@@ -61,6 +53,8 @@ export default class Api {
         name: `${profileData.userName}`,
         about: `${profileData.about}`,
       }),
+    }).then((response) => {
+      return this._checkServerResponse(response);
     });
   }
 
@@ -69,8 +63,10 @@ export default class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        avatar: `${avatar.link}`,
+        avatar: `${avatar.avatarLink}`,
       }),
+    }).then((response) => {
+      return this._checkServerResponse(response);
     });
   }
 
@@ -79,13 +75,7 @@ export default class Api {
       method: "PUT",
       headers: this._headers,
     }).then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        return Promise.reject(
-          `Ошибка: ${response.status} ${response.statusText}`
-        );
-      }
+      return this._checkServerResponse(response);
     });
   }
 
@@ -94,13 +84,7 @@ export default class Api {
       headers: this._headers,
       method: "DELETE",
     }).then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        return Promise.reject(
-          `Ошибка: ${response.status} ${response.statusText}`
-        );
-      }
+      return this._checkServerResponse(response);
     });
   }
 
@@ -109,13 +93,7 @@ export default class Api {
       headers: this._headers,
       method: "DELETE",
     }).then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        return Promise.reject(
-          `Ошибка: ${response.status} ${response.statusText}`
-        );
-      }
+      return this._checkServerResponse(response);
     });
   }
 }

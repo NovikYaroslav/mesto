@@ -9,6 +9,10 @@ export class Section {
     items.forEach(this._renderer);
   }
 
+  addInitialItems(card) {
+    this._container.append(card);
+  }
+
   addItem(card) {
     this._container.prepend(card);
   }
